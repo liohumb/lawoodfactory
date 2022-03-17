@@ -46,6 +46,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastname;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $cguv;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +160,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCguv(): ?bool
+    {
+        return $this->cguv;
+    }
+
+    public function setCguv(bool $cguv): self
+    {
+        $this->cguv = $cguv;
 
         return $this;
     }
