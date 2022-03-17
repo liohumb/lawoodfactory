@@ -1,20 +1,174 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <!--===== HOME =====-->
+    <section class="home" id="home">
+        <div class="home__container grid">
+            <div class="home__data">
+                <h1 class="home__title">L&A <br> <span>WOODFACTORY</span></h1>
+                <a href="#featured" class="button">VOIR NOS PRODUITS</a>
+            </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <img src="{{ asset('assets/img/home.png') }}" alt="" class="home__img">
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!--===== COLLECTION =====-->
+    <section class="collection section">
+        <div class="collection__container grid">
+            <div class="collection__box">
+                <img src="{{ asset('assets/img/collection1.png') }}" alt="" class="collection__img">
+                <div class="collection__data">
+                    <h2 class="collection__title"><span class="collection__subtitle">Produits</span><br> Meubles & co</h2>
+                    <a href="#" class="collection__view">Notre boutique en ligne</a>
+                </div>
+            </div>
+
+            <div class="collection__box collection__box2">
+                <div class="collection__data">
+                    <h2 class="collection__title"><span class="collection__subtitle">Services</span><br> sur-mesure</h2>
+                    <a href="#" class="collection__view">Contactez nous</a>
+                </div>
+
+                <img src="{{ asset('assets/img/collection2.png') }}" alt="" class="collection__img">
+            </div>
+        </div>
+    </section>
+
+    <!--===== FEATURED PRODUCTS =====-->
+    <section class="featured section" id="featured">
+        <h2 class="section__title">LES PRODUITS DU MOMENT</h2>
+        <a href="#" class="section__subtitle">Voir tous les produits</a>
+
+        <div class="featured__container grid">
+            <div class="featured__product">
+                <div class="featured__box">
+                    <img src="{{ asset('assets/img/feature1.png') }}" alt="" class="featured__img">
+                </div>
+
+                <div class="featured__data">
+                    <h3 class="featured__name">Son premier cheval</h3>
+                    <span class="featured__price">59€99</span>
+                </div>
+            </div>
+
+            <div class="featured__product">
+                <div class="featured__box">
+                    <img src="{{ asset('assets/img/feature2.png') }}" alt="" class="featured__img">
+                </div>
+
+                <div class="featured__data">
+                    <h3 class="featured__name">La table d'appoint</h3>
+                    <span class="featured__price">99€00</span>
+                </div>
+            </div>
+
+            <div class="featured__product">
+                <div class="featured__box">
+                    <img src="{{ asset('assets/img/feature3.png') }}" alt="" class="featured__img">
+                </div>
+
+                <div class="featured__data">
+                    <h3 class="featured__name">Le tabouret de bar</h3>
+                    <span class="featured__price">65€50</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--===== OFFER =====-->
+    <section class="offer section">
+        <div class="offer__bg" style="background: url({{ asset('assets/img/offer.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="offer__data">
+                <h2 class="offer__title">Offre spéciale !</h2>
+                <p class="offer__description">Découvrez nos promotions du moment !</p>
+                <a href="" class="button button__alt">DÉCOUVRIR</a>
+            </div>
+        </div>
+    </section>
+
+    <!--===== NEW ARRIVALS =====-->
+    <section class="featured section" id="new">
+        <h2 class="section__title">NOUVEAUX PRODUITS</h2>
+        <a href="#" class="section__subtitle">Voir tous les produits</a>
+
+        <div class="new__container grid">
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new1.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new2.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new3.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new4.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new5.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+
+            <div class="new__box">
+                <img src="{{ asset('assets/img/new6.png') }}" alt="" class="new__img">
+
+                <div class="new__link">
+                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--===== contact =====-->
+    <section class="contact section" id="contact">
+        <div class="contact__container grid">
+            <div class="contact__subscribe">
+                <h2 class="section__title">CONTACTEZ NOUS</h2>
+                <p class="contact__description">Pour toutes questions ou autres, n'hésitez pas et contactez-nous dès à présent !</p>
+                <form action="" class="contact__form">
+                    <div class="form__inputs">
+                        <div class="form__content">
+                            <input type="text" id="contact_form_name" placeholder=" " class="form__input">
+                            <label for="contact_form_name" class="form__label">Votre nom</label>
+                        </div>
+                        <div class="form__content">
+                            <input type="email" id="contact_form_email" placeholder=" " class="form__input">
+                            <label for="contact_form_email" class="form__label">votre@email.com</label>
+                        </div>
+                        <div class="form__content form__area">
+                            <textarea  id="contact_form_content" placeholder=" " class="form__input"></textarea>
+                            <label for="contact_form_content" class="form__label">Votre message</label>
+                        </div>
+                    </div>
+                    <button class="button">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
 {% endblock %}
