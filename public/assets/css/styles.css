@@ -186,8 +186,8 @@ img {
 /*===== FORM =====*/
 .form__inputs {
   display: grid;
-  row-gap: 2rem;
-  margin-bottom: var(--mb-3);
+  row-gap: 1.5rem;
+  margin-bottom: var(--mb-1-5);
 }
 
 .form__content {
@@ -839,11 +839,11 @@ margin: .4rem 0 0 0;
     grid-template-columns: repeat(3, 1fr);
   }
   .template__container {
-    height: 100vh;
+    height: 95vh;
     grid-template-columns: repeat(2, 1fr);
   }
   .template__box {
-    height: 82vh;
+    height: 73vh;
   }
   .template__border-lt {
     border-radius: 1rem 0 0 1rem;
