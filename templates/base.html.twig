@@ -6,7 +6,7 @@
         <meta name="description" content="La boutique d'ameublement & plus 100% fait main.">
 
         <!-- ===== BOXICONS ===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
@@ -89,5 +89,9 @@
 
         <!--===== MAIN JS =====-->
         <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        {% block JavaScript %}
+        {% endblock %}
+
     </body>
 </html>

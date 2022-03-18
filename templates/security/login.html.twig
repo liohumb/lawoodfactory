@@ -1,42 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Connexion</h1>
+                    <h3 class="template__box-subtitle">Connectez vous dès à présent et accédez à votre espace L&A WoodFactory et bien plus encore !</h3>
+                    <h3 class="template__box-other">Vous avez aussi la possibilité de vous connecter avec :</h3>
+                    <div class="template__box-social">
+                        <a href="">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                        <a href="">
+                            <i class='bx bxl-google' ></i>
+                        </a>
+                        <a href="">
+                            <i class='bx bxl-apple' ></i>
+                        </a>
+                    </div>
+                    <span class="template__box-detail">
+                        Vous n'avez pas de compte ? <br>
+                        <a href="">inscrivez-vous</a>
+                    </span>
+                </div>
+            </div>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <div class="template__form template__border-rb">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <div class="form__inputs">
+                        <div class="form__content">
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form__input" autocomplete="email"  placeholder=" " required autofocus>
+                            <label for="inputEmail" class="form__label">Votre adresse em@il</label>
+                        </div>
+                        <div class="form__content">
+                            <input type="password" name="password" id="inputPassword" class="form__input" autocomplete="current-password" placeholder=" " required>
+                            <label for="inputPassword" class="form__label">Votre mot de passe</label>
+                        </div>
+                        <div class="form__content-show">
+                            <a onclick="Afficher()">
+                                <i class='bx bx-show' id="show-icon"></i>
+                                <span id="show-text">voir le mot de passe</span>
+                            </a>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+
+                        <div class="form__content-check">
+                            <input type="checkbox" id="inputRemember" name="_remember_me" class="form__input-check">
+                            <label for="inputRemember" class="form__label-check">Se souvenir de moi</label>
+                        </div>
+                    </div>
+
+                    <button class="button" type="submit">
+                        Connexion
+                    </button>
+                </form>
+            </div>
         </div>
-    {% endif %}
+    </section>
+{% endblock %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+{% block JavaScript %}
+    <script>
+        function Afficher() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("inputPassword");
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer le mot de passe";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir le mot de passe";
+            }
+        }
+    </script>
 {% endblock %}

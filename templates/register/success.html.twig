@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription réussi • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Inscription</h1>
+                    <h3 class="template__box-subtitle">Votre inscription est presque terminée !</h3>
+                    <h3 class="template__box-other">Il ne vous reste plus qu'à confirmer votre adresse em@il.</h3>
+                    <h3 class="template__box-other">Pour ce faire, nous vous invitons à consulter votre boite mail.</h3>
+                    <a href="{{ path('home') }}" class="button button__alt">Retour à l'accueil</a>
+                </div>
+            </div>
+
+            <div class="template__form template__border-rb">
+                <div class="template__form-logo">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="logo">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
