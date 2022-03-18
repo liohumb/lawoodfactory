@@ -1,20 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}Votre compte • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Votre compte</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="account__container-mobile grid">
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">VOIR LES COMMANDES</span>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">GÉRER LES ADRESSES</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ path('account_password') }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/account/password.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">MODIFIER LE MOT DE PASSE</span>
+                    </div>
+                </div>
+            </a>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Account/AccountController.php'|file_link(0) }}">src/Controller/Account/AccountController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/account/account/index.html.twig'|file_link(0) }}">templates/account/account/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="account__container grid">
+            <div class="account__box" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">VOIR LES COMMANDES</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">GÉRER LES ADRESSES</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/account/password.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="{{ path('account_password') }}" class="button button__white">MODIFIER LE MOT DE PASSE</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

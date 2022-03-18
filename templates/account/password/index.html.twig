@@ -1,20 +1,136 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PasswordController!{% endblock %}
+{% block title %}Modifier votre mot de passe • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/password.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Mot de passe</h1>
+                    <h3 class="template__box-subtitle">Sécurité avant tout !</h3>
+                    <h3 class="template__box-other">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir modifier votre mot de passe.</h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                    <span class="template__box-detail">
+                        <a href="{{ path('account') }}">retour</a>
+                    </span>
+                </div>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Account/PasswordController.php'|file_link(0) }}">src/Controller/Account/PasswordController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/account/password/index.html.twig'|file_link(0) }}">templates/account/password/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <div class="template__form template__form-password template__border-rb">
+                {{ form_start(form) }}
+
+                    {% if notification %}
+                        <h3 class="form__notification">{{ notification }}</h3>
+                    {% endif %}
+                        <h3 class="form__notification">{{ form_errors(form.new_password.first) }}</h3>
+
+                    <div class="form__content">
+                        {{ form_widget(form.old_password) }}
+                        <label for="change_old_password" class="form__label">Votre mot de passe</label>
+                    </div>
+                    <div class="form__content-showPassword">
+                        <a onclick="Old()">
+                            <i class='bx bx-show' id="show-icon"></i>
+                            <span id="show-text">voir l'ancien mot de passe</span>
+                        </a>
+                    </div>
+                    {{ form_errors(form.old_password) }}
+                    <div class="form__content">
+                        {{ form_widget(form.new_password.first) }}
+                        <label for="change_new_password_first" class="form__label">Votre mot de passe</label>
+                    </div>
+                    <div class="form__content-showPassword">
+                        <a onclick="New()">
+                            <i class='bx bx-show' id="show-icon"></i>
+                            <span id="show-text">voir le nouveau mot de passe</span>
+                        </a>
+                    </div>
+                    <div class="form__content">
+                        {{ form_widget(form.new_password.second) }}
+                        <label for="change_new_password_second" class="form__label">Votre mot de passe</label>
+                    </div>
+                    <div class="form__content-showPassword">
+                        <a onclick="Confirme()">
+                            <i class='bx bx-show' id="show-icon"></i>
+                            <span id="show-text">voir la confirmation</span>
+                        </a>
+                    </div>
+                    {{ form_errors(form.new_password.second) }}
+
+                <button class="button">
+                    Modifier
+                </button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        function Old() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("change_old_password");
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer l'ancien mot de passe";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir l'ancien mot de passe";
+            }
+        }
+        function New() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("change_new_password_first");
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer le nouveau mot de passe";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir le nouveau mot de passe";
+            }
+        }
+        function Confirme() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("change_new_password_second");
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer la confirmation";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir la confirmation";
+            }
+        }
+    </script>
 {% endblock %}

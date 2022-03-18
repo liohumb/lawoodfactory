@@ -202,12 +202,20 @@ img {
   cursor: pointer;
 }
 
+.form__content-showPassword {
+  position: relative;
+  top: .5rem;
+  cursor: pointer;
+}
+
+.form__content-showPassword a,
 .form__content-show a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
+.form__content-showPassword a i,
 .form__content-show a i {
   margin: 0 .5rem 0 0;
 }
@@ -224,11 +232,12 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 1rem 1rem 1rem 0;
   background: none;
+  font-size: var(--normal-font-size);
   color: var(--text-color-light);
   border: none;
   outline: none;
+  padding: 1rem 1rem .25rem 0;
   z-index: 1;
 }
 
@@ -275,6 +284,13 @@ img {
   z-index: 10;
 }
 
+.form__notification {
+  font-size: var(--normal-font-size);
+  color: var(--red-color);
+  font-style: italic;
+  text-align: center;
+}
+
 /*===== NAV =====*/
 .nav {
   height: var(--header-height);
@@ -290,6 +306,10 @@ img {
   align-items: center;
 }
 
+.nav__connection {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .nav__menu {
     position: fixed;
@@ -298,8 +318,7 @@ img {
     width: 100%;
     height: 100%;
     padding: 2rem 0;
-    background-color: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(5px);
+    background-color: var(--container-color);
     -webkit-transition: 1s;
     transition: 1s;
   }
@@ -316,12 +335,16 @@ img {
 .nav__link {
   color: var(--first-color-alt);
   font-weight: var(--font-medium);
-  text-transform: uppercase;
   transition: 1s;
 }
 
 .nav__link:hover {
   color: var(--first-color);
+}
+
+.nav__connection-list .nav__item .nav__link,
+.nav__item-mobile .nav__link {
+  margin: 0 1rem;
 }
 
 .nav__logo {
@@ -570,7 +593,7 @@ margin: .4rem 0 0 0;
   text-align: center;
 }
 
-/*===== template =====*/
+/*===== TEMPLATE =====*/
 .template {
   background-color: var(--container-color);
 }
@@ -689,6 +712,10 @@ margin: .4rem 0 0 0;
   margin: 0 auto;
 }
 
+.template__form-password form button {
+  margin: 4rem auto 0;
+}
+
 .template__form-logo {
   width: 100%;
   height: 100%;
@@ -709,6 +736,62 @@ margin: .4rem 0 0 0;
   to {
     transform: rotate(360deg);
   }
+}
+
+/*===== ACCOUNT =====*/
+.account__title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  text-align: center;
+  margin: 0 0 3rem 0;
+}
+
+.account__container-mobile {
+  row-gap: 2rem;
+}
+
+.account__container {
+  display: none;
+}
+
+.account__box {
+  height: 250px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: var(--container-color);
+  overflow: hidden;
+}
+
+.account__box:hover .account__link {
+  bottom: 0;
+}
+
+.account__link-mobile,
+.account__link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: rgba(33, 70, 95, 0.2);
+  -webkit-transition: .3s;
+  transition: 1s;
+}
+
+.account__link {
+  bottom: -100%;
 }
 
 /*===== FOOTER =====*/
@@ -782,6 +865,13 @@ margin: .4rem 0 0 0;
   body {
     margin: 0;
   }
+  header:hover .nav__connection {
+    margin: 0 auto;
+  }
+  header:hover .nav__connection-menu {
+    visibility: visible;
+    opacity: 1;
+  }
   .section__subtitle {
     margin-bottom: var(--mb-4);
   }
@@ -793,6 +883,14 @@ margin: .4rem 0 0 0;
     -webkit-box-pack: initial;
     -ms-flex-pack: initial;
     justify-content: initial;
+  }
+  .nav__connection {
+    height: calc(var(--header-height) + -0.5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -3rem auto 0 auto;
+    transition: 1s;
   }
   .nav__logo img {
     height: 75px;
@@ -810,6 +908,22 @@ margin: .4rem 0 0 0;
     margin-bottom: 0;
   }
   .nav__toggle {
+    display: none;
+  }
+  .nav__connection-list {
+    flex-direction: row;
+    column-gap: 3rem;
+  }
+  .nav__connection-menu {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 2rem 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity .3s linear;
+    transition-delay: .3s;
+  }
+  .nav__item-mobile {
     display: none;
   }
   .home__container {
@@ -853,6 +967,17 @@ margin: .4rem 0 0 0;
   }
   .template__box-detail {
     padding: 1.5rem 0 0 0;
+  }
+  .account__title{
+    margin: 4rem 0 0 0;
+  }
+  .account__container-mobile {
+    display: none;
+  }
+  .account__container {
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
   .footer__box-social {
     display: flex;

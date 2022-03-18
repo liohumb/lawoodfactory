@@ -9,12 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/account/account", name="app_account_account")
+     * @Route("/votre-compte", name="account")
      */
     public function index(): Response
     {
-        return $this->render('account/account/index.html.twig', [
-            'controller_name' => 'AccountController',
-        ]);
+        return $this->render('account/index.html.twig');
     }
 }
