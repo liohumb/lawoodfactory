@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/password.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Mot de passe <br>oublié</h1>
+                    <h3 class="template__box-subtitle">Un oublie? Ça arrive !</h3>
+                    <h3 class="template__box-other">C'est dans cet espace que vous allez pouvoir mettre à jour votre nouveau mot de passe.</h3>
+
+                    <span class="template__box-detail">
+                        <a href="{{ path('login') }}">retour</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="template__form template__form-password template__border-rb">
+
+                {{ form_start(form) }}
+
+                    <h3 class="form__notification">{{ form_errors(form.new_password.first) }}</h3>
+                    <div class="form__content">
+                        {{ form_widget(form.new_password.first) }}
+                        <label for="change_new_password_first" class="form__label">Votre nouveau mot de passe</label>
+                    </div>
+                    <div class="form__content-showPassword">
+                        <a onclick="New()">
+                            <i class='bx bx-show' id="show-icon"></i>
+                            <span id="show-text">voir le nouveau mot de passe</span>
+                        </a>
+                    </div>
+                    <div class="form__content">
+                        {{ form_widget(form.new_password.second) }}
+                        <label for="change_new_password_second" class="form__label">La confirmation</label>
+                    </div>
+                    <div class="form__content-showPassword">
+                        <a onclick="Confirme()">
+                            <i class='bx bx-show' id="show-icon"></i>
+                            <span id="show-text">voir la confirmation</span>
+                        </a>
+                    </div>
+                    {{ form_errors(form.new_password.second) }}
+
+                    <button class="button">
+                        Modifier
+                    </button>
+
+                {{ form_end(form) }}
+
+                {% for message in app.flashes('notice') %}
+                    <h3 class="form__notification">{{ message }}</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        function New() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("reset_new_password_first");
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer le nouveau mot de passe";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir le nouveau mot de passe";
+            }
+        }
+        function Confirme() {
+            const icon = document.getElementById("show-icon");
+            const text = document.getElementById("show-text");
+            let input = document.getElementById("reset_new_password_second");
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+
+            if (icon.classList.contains('bx-show')) {
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+                text.innerHTML = "masquer la confirmation";
+            } else {
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+                text.innerHTML = "voir la confirmation";
+            }
+        }
+    </script>
+{% endblock %}

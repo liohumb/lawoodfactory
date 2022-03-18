@@ -10,7 +10,9 @@
                     {% if error %}
                         <h3 class="form__notification">{{ error.messageKey|trans(error.messageData, 'security') }}</h3>
                     {% endif %}
-
+                    {% for message in app.flashes('notice') %}
+                        <h3 class="form__notification">{{ message }}</h3>
+                    {% endfor %}
                     {% if app.user %}
                         <h3 class="form__notification">
                             You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
@@ -32,9 +34,7 @@
                             </a>
                         </div>
 
-                        <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}"
-                        >
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                         <div class="form__content-check">
                             <input type="checkbox" id="inputRemember" name="_remember_me" class="form__input-check">
@@ -46,6 +46,7 @@
                         Connexion
                     </button>
                 </form>
+                <a href="{{ path('reset_password') }}" class="form__password-forget">Vous avez oublié votre mot de passe ?</a>
             </div>
 
             <div class="template__box template__border-rb" style="background: url({{ asset('assets/img/template/connexion.jpg') }}) no-repeat center center; background-size: cover">

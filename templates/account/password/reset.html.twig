@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/password.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Mot de passe <br>oublié</h1>
+                    <h3 class="template__box-subtitle">Un oublie? Ça arrive !</h3>
+                    <h3 class="template__box-other">C'est dans cet espace que vous allez pouvoir réinitialiser votre mot de passe.</h3>
+
+                    <span class="template__box-detail">
+                        <a href="{{ path('login') }}">retour</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="template__form template__form-password template__border-rb">
+                <form method="post">
+                    <div class="form__inputs">
+                        <div class="form__content">
+                            <input type="email" name="email" id="inputEmail" class="form__input" autocomplete="email"  placeholder=" " required autofocus>
+                            <label for="inputEmail" class="form__label">Votre adresse em@il</label>
+                        </div>
+                    </div>
+
+                    <button class="button" type="submit">
+                        Réinitialiser
+                    </button>
+                </form>
+                {% for message in app.flashes('notice') %}
+                    <h3 class="form__notification">{{ message }}</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

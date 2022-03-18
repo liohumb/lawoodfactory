@@ -27,7 +27,7 @@
 
                     <div class="form__content">
                         {{ form_widget(form.old_password) }}
-                        <label for="change_old_password" class="form__label">Votre mot de passe</label>
+                        <label for="change_old_password" class="form__label">Votre ancien mot de passe</label>
                     </div>
                     <div class="form__content-showPassword">
                         <a onclick="Old()">
@@ -38,7 +38,7 @@
                     {{ form_errors(form.old_password) }}
                     <div class="form__content">
                         {{ form_widget(form.new_password.first) }}
-                        <label for="change_new_password_first" class="form__label">Votre mot de passe</label>
+                        <label for="change_new_password_first" class="form__label">Votre nouveau mot de passe</label>
                     </div>
                     <div class="form__content-showPassword">
                         <a onclick="New()">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form__content">
                         {{ form_widget(form.new_password.second) }}
-                        <label for="change_new_password_second" class="form__label">Votre mot de passe</label>
+                        <label for="change_new_password_second" class="form__label">Confirmez votre nouveau mot de passe</label>
                     </div>
                     <div class="form__content-showPassword">
                         <a onclick="Confirme()">
