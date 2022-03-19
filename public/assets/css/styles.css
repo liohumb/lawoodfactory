@@ -762,7 +762,8 @@ margin: .4rem 0 0 0;
   row-gap: 2rem;
 }
 
-.account__container {
+.account__container,
+.account__admin-container {
   display: none;
 }
 
@@ -993,6 +994,12 @@ margin: .4rem 0 0 0;
   .account__container {
     height: 70vh;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .account__admin-container {
+    height: 80vh;
+    display: grid;
+    row-gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
   }
   .footer__box-social {

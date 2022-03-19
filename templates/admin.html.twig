@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La boutique d'ameublement & plus 100% fait main.">
+
+    <!-- ===== FAVICON ===== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('assets/img/favicon/site.webmanifest') }}">
+
+    <!-- ===== BOXICONS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+
+    <title>
+        {% block title %}
+            Administration • L&A WoodFactory
+        {% endblock %}
+    </title>
+</head>
+<body>
+<!--===== HEADER =====-->
+<header class="header">
+    <nav class="nav grid">
+        <div>
+            <a href="{{ path('admin') }}" class="nav__logo active-link">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="">
+            </a>
+        </div>
+
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="" class="nav__link">Utilisateurs</a>
+                </li>
+                <li class="nav__item">
+                    <a href="" class="nav__link">Commandes</a>
+                </li>
+                <li class="nav__item">
+                    <a href="{{ path('home') }}#contact" class="nav__link">Produits</a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <i class='bx bx-cart nav__cart'></i>
+            <i class='bx bx-menu nav__toggle' id="nav-toggle"></i>
+        </div>
+    </nav>
+</header>
+
+<main class="main">
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<!--===== FOOTER =====-->
+<footer class="footer section">
+    <div class="footer__container grid">
+        <div class="footer__box">
+            <h3 class="footer__title">L&A <br>WOODFACTORY</h3>
+            <p class="footer__deal">Administration</p>
+        </div>
+
+        <div class="footer__box">
+            <h3 class="footer__title">EXPLORER</h3>
+            <ul>
+                <li><a href="#" class="footer__link">Administration</a></li>
+                <li><a href="#" class="footer__link">Utilisateurs</a></li>
+                <li><a href="#" class="footer__link">Commandes</a></li>
+                <li><a href="#" class="footer__link">Produits</a></li>
+            </ul>
+        </div>
+
+        <div class="footer__box">
+            <h3 class="footer__title">PERSONNALISER</h3>
+            <ul>
+                <li><a href="#" class="footer__link">Transporteurs</a></li>
+                <li><a href="#" class="footer__link">Conditions générales</a></li>
+            </ul>
+        </div>
+
+        <div class="footer__box footer__box-social">
+            <h3 class="footer__title">OUTILS</h3>
+            <div class="footer__socials">
+                <a href="https://app.mailjet.com/dashboard" target="_blank" class="footer__social"><i class='bx bx-mail-send'></i></a>
+                <a href="#" class="footer__social"><i class='bx bxl-stripe' ></i></a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<!--===== MAIN JS =====-->
+<script src="{{ asset('assets/js/main.js') }}"></script>
+
+{% block JavaScript %}
+{% endblock %}
+
+</body>
+</html>

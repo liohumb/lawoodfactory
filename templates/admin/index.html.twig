@@ -1,0 +1,92 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Votre administration</h2>
+
+        <div class="account__container-mobile grid">
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">VOIR LES UTILISATEURS</span>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">GÉRER LES COMMANDES</span>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/product.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">GÉRER LES PRODUITS</span>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/carrer.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">GÉRER LES TRANSPORTEURS</span>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/condition.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">CONDITIONS GÉNÉRALES</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ path('home') }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/logo.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">RETOUR AU SITE</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="account__admin-container grid">
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">VOIR LES UTILISATEURS</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">GÉRER LES COMMANDES</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/product.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="" class="button button__white">GÉRER LES PRODUITS</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/carrer.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="" class="button button__white">GÉRER LES TRANSPORTEURS</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/condition.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="" class="button button__white">CONDITIONS GÉNÉRALES</a>
+                </div>
+            </div>
+
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/logo.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="{{ path('home') }}" class="button button__white">RETOUR AU SITE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
