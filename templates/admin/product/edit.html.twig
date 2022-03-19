@@ -1,0 +1,109 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Inscription • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__form template__border-lt">
+                {{ form_start(form) }}
+                <div class="form__inputs">
+                    <div class="form__content">
+                        {{ form_widget(form.title) }}
+                        {{ form_label(form.title) }}
+                    </div>
+                    <div class="form__content">
+                        {{ form_widget(form.subtitle) }}
+                        {{ form_label(form.subtitle) }}
+                    </div>
+                    <div class="form__content form__area">
+                        {{ form_widget(form.description) }}
+                        {{ form_label(form.description) }}
+                    </div>
+                    <div class="form__content">
+                        {{ form_widget(form.price) }}
+                        {{ form_label(form.price) }}
+                    </div>
+                    <div class="form__content-file">
+                        {{ form_widget(form.illustration) }}
+                    </div>
+                </div>
+
+                <button class="button">
+                    Modifier
+                </button>
+                {{ form_end(form) }}
+            </div>
+
+            <div class="template__box template__box-product template__border-rb" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-rb">
+                    <h1 class="template__box-title">{{ product.title }}</h1>
+                    <h3 class="template__box-subtitle">Éditer le formulaire pour modifier un produit</h3>
+                    <a href="{{ path('admin_product_delete', {id: product.id}) }}" class="button__delete">Supprimer</a>
+                    <h3 class="template__box-subtitle">Vous avez aussi la possibilité de supprimer ce produit. Attention! Cette action est irreversible!!</h3>
+                    <span class="template__box-detail">
+                        <a href="{{ path('admin_product') }}">retour</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {% if app.request.attributes.get('_route') == 'admin_product_edit' %}
+            <h1 class="template__edit-title">Les illustrations du produit <br>“{{ product.title }}”</h1>
+            <div class="account__container-mobile grid">
+                {% for illustration in product.illustrations %}
+                    <a href="{{ path('admin_illustration_delete', {id: illustration.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ illustration.id) }}">
+                        <div class="account__box" style="background: url({{ asset('uploads/' ~ illustration.title) }}) no-repeat center center; background-size: cover;">
+                            <div class="account__link-mobile account__link-product">
+                                <span class="button button__white">SUPPRIMER</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="template__edit-container grid">
+                {% for illustration in product.illustrations %}
+                    <div class="account__box" style="background: url({{ asset('uploads/' ~ illustration.title) }}) no-repeat center center; background-size: cover;">
+                        <div class="account__link account__link-product">
+                            <a href="{{ path('admin_illustration_delete', {id: illustration.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ illustration.id) }}" class="button button__white">SUPPRIMER</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        window.onload = () => {
+            let links = document.querySelectorAll("[data-delete]")
+
+            for(link of links){
+                link.addEventListener("click", function(e){
+                    e.preventDefault()
+
+                    if(confirm("Voulez-vous supprimer cette image ? \n Si oui, merci de rafraichir la page.")){
+                        fetch(this.getAttribute("href"), {
+                            method: "DELETE",
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({"_token": this.dataset.token})
+                        }).then(
+                            response => response.json()
+                        ).then(data => {
+                            if(data.success)
+                                this.parentElement.remove()
+                            else
+                                alert(data.error)
+                        }).catch(e => alert(e))
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock %}
+
+

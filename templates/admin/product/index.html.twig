@@ -1,20 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Administration{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Vos produits</h2>
+        <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
+        <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir voir, ajouter, modifier et supprimer un produit.</h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Admin/ProductController.php'|file_link(0) }}">src/Controller/Admin/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/admin/product/index.html.twig'|file_link(0) }}">templates/admin/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="account__container-mobile grid">
+            <a href="{{ path('admin_product_add') }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/product/add.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile account__link-product">
+                        <span class="button button__white">AJOUTER UN PRODUIT</span>
+                    </div>
+                </div>
+            </a>
+            {% for product in products %}
+                <a href="{{ path('admin_product_edit', {id: product.id}) }}">
+                    <div class="account__box" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <div class="account__link-mobile account__link-product">
+                            <span class="account__link-title">{{ product.title }}</span>
+                            <span class="button button__white">MODIFIER</span>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+
+        <div class="account__admin-container grid">
+            <div class="account__box" style="background: url({{ asset('assets/img/admin/product/add.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link account__link-product">
+                    <a href="{{ path('admin_product_add') }}" class="button button__white">AJOUTER UN PRODUIT</a>
+                </div>
+            </div>
+            {% for product in products %}
+                <div class="account__box" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link account__link-product">
+                        <span class="account__link-title">{{ product.title }}</span>
+                        <a href="{{ path('admin_product_edit', {id: product.id}) }}" class="button button__white">MODIFIER</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
