@@ -45,9 +45,14 @@ class Product
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity=Illustration::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Illustration::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
      */
     private $illustrations;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -145,6 +150,18 @@ class Product
                 $illustration->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
