@@ -57,6 +57,26 @@ class Product
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longueur;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $largeur;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $poids;
+
     public function __construct()
     {
         $this->illustrations = new ArrayCollection();
@@ -153,5 +173,53 @@ class Product
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getLongueur(): ?float
+    {
+        return $this->longueur;
+    }
+
+    public function setLongueur(?float $longueur): self
+    {
+        $this->longueur = $longueur;
+
+        return $this;
+    }
+
+    public function getLargeur(): ?float
+    {
+        return $this->largeur;
+    }
+
+    public function setLargeur(?float $largeur): self
+    {
+        $this->largeur = $largeur;
+
+        return $this;
+    }
+
+    public function getPoids(): ?float
+    {
+        return $this->poids;
+    }
+
+    public function setPoids(?float $poids): self
+    {
+        $this->poids = $poids;
+
+        return $this;
     }
 }
