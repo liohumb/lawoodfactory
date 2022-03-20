@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Les produits • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="products section" id="products">
+        <h2 class="products__section-title">
+            Nos Produits
+        </h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="products__mobile-container container swiper">
+            <div class="swiper-wrapper">
+                {% for product in products %}
+                    <article class="products__mobile-card swiper-slide" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <a href="{{ path('product_show', {slug: product.slug}) }}">
+                            <div class="products__data">
+                                <h1 class="products__title">{{ product.title }}</h1>
+                                <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                                <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="products__container container">
+            <div class="products__content grid">
+                {% for product in products %}
+                        <article class="products__card" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                            <a href="{{ path('product_show', {slug: product.slug}) }}">
+                                <div class="products__data">
+                                    <h1 class="products__title">{{ product.title }}</h1>
+                                    <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                                    <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                                </div>
+                            </a>
+                        </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

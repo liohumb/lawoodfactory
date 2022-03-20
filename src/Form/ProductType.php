@@ -70,6 +70,7 @@ class ProductType extends AbstractType
             ])
             ->add('longueur', NumberType::class, [
                 'label' => 'La longueur',
+                'required' => false,
                 'attr' => [
                     'class' => 'form__input',
                     'placeholder' => ' '
@@ -80,6 +81,7 @@ class ProductType extends AbstractType
             ])
             ->add('largeur', NumberType::class, [
                 'label' => 'La largeur',
+                'required' => false,
                 'attr' => [
                     'class' => 'form__input',
                     'placeholder' => ' '
@@ -90,6 +92,7 @@ class ProductType extends AbstractType
             ])
             ->add('poids', NumberType::class, [
                 'label' => 'Le poids',
+                'required' => false,
                 'attr' => [
                     'class' => 'form__input',
                     'placeholder' => ' '

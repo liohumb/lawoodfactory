@@ -24,3 +24,24 @@ function linkAction(){
     navMenu.classList.remove('show')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
+
+/*=============== POPULAR SWIPER ===============*/
+let swiperPopular = new Swiper('.products__mobile-container', {
+    loop: true,
+    spaceBetween: 30,
+    slidesPerView: "auto",
+    grabCursor: true,
+
+    pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+    },
+    breakpoints: {
+        768: {
+            slidesPerView: 3,
+        },
+        1024: {
+            spaceBetween: 48,
+        },
+    },
+});
