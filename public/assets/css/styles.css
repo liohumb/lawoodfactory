@@ -220,6 +220,12 @@ img {
   border-bottom: 1px solid var(--first-color-alt);
 }
 
+.form__content-content {
+  display: grid;
+  grid-template-columns: 32% 30% 30%;
+  justify-content: space-between;
+}
+
 .form__content-show {
   position: relative;
   top: -1rem;
@@ -743,6 +749,10 @@ margin: .4rem 0 0 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
+.template__form-product {
+  height: 70vh;
+}
+
 .template__form form {
   width: 100%;
   padding: 2.5rem 4rem;
@@ -1049,7 +1059,8 @@ margin: .4rem 0 0 0;
   .template__form {
     height: 73vh;
   }
-  .template__box-product {
+  .template__box-product,
+  .template__form-product {
     height: 76vh;
   }
   .template__border-lt {

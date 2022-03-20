@@ -28,6 +28,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/administration/produits", name="admin_product")
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -38,6 +40,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/administration/produit/ajouter", name="admin_product_add")
+     * @param Request $request
+     * @return Response
      */
     public function add(Request $request): Response
     {
@@ -47,6 +51,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product->setActive(true);
+
             $illustrations = $form->get('illustration')->getData();
 
             foreach ($illustrations as $illustration) {
@@ -72,6 +78,9 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/administration/produit/editer/{id}", name="admin_product_edit")
+     * @param Request $request
+     * @param Product $product
+     * @return Response
      */
     public function edit(Request $request, Product $product): Response
     {
@@ -104,6 +113,21 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/administration/produit/activer-desactiver", name="admin_product_active")
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function active(Product $product): RedirectResponse
+    {
+        $product->setActive(!$product->getActive());
+
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('admin_product');
+    }
+
+    /**
      * @Route("/administration/produit/supprimer/{id}", name="admin_product_delete")
      * @param $id
      * @return RedirectResponse
@@ -122,6 +146,9 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/administration/product/supprimer-illustration/{id}", name="admin_illustration_delete")
+     * @param Illustration $illustration
+     * @param Request $request
+     * @return JsonResponse
      */
     public function deleteIllustration(Illustration $illustration, Request $request): JsonResponse
     {

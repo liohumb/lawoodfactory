@@ -5,7 +5,7 @@
 {% block content %}
     <section class="template section container" id="template">
         <div class="template__container grid">
-            <div class="template__form template__border-lt">
+            <div class="template__form template__form-product template__border-lt">
                 {{ form_start(form) }}
                 <div class="form__inputs">
                     <div class="form__content">
@@ -26,6 +26,20 @@
                     </div>
                     <div class="form__content-file">
                         {{ form_widget(form.illustration) }}
+                    </div>
+                    <div class="form__content-content">
+                        <div class="form__content">
+                            {{ form_widget(form.longueur) }}
+                            {{ form_label(form.longueur) }}
+                        </div>
+                        <div class="form__content">
+                            {{ form_widget(form.largeur) }}
+                            {{ form_label(form.largeur) }}
+                        </div>
+                        <div class="form__content">
+                            {{ form_widget(form.poids) }}
+                            {{ form_label(form.poids) }}
+                        </div>
                     </div>
                 </div>
 

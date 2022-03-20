@@ -68,6 +68,36 @@ class ProductType extends AbstractType
                     'class' => 'form__label-file'
                 ]
             ])
+            ->add('longueur', NumberType::class, [
+                'label' => 'La longueur',
+                'attr' => [
+                    'class' => 'form__input',
+                    'placeholder' => ' '
+                ],
+                'label_attr' => [
+                    'class' => 'form__label'
+                ]
+            ])
+            ->add('largeur', NumberType::class, [
+                'label' => 'La largeur',
+                'attr' => [
+                    'class' => 'form__input',
+                    'placeholder' => ' '
+                ],
+                'label_attr' => [
+                    'class' => 'form__label'
+                ]
+            ])
+            ->add('poids', NumberType::class, [
+                'label' => 'Le poids',
+                'attr' => [
+                    'class' => 'form__input',
+                    'placeholder' => ' '
+                ],
+                'label_attr' => [
+                    'class' => 'form__label'
+                ]
+            ])
         ;
     }
 
