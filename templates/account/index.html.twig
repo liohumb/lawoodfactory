@@ -28,6 +28,15 @@
                     </div>
                 </div>
             </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin') }}">
+                    <div class="account__box" style="background: url({{ asset('assets/img/account/admin.jpg') }}) no-repeat center center; background-size: cover;">
+                        <div class="account__link-mobile">
+                            <span class="button button__white">ADMINISTRATION</span>
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
         </div>
 
         <div class="account__container grid">
@@ -48,6 +57,13 @@
                     <a href="{{ path('account_password') }}" class="button button__white">MODIFIER LE MOT DE PASSE</a>
                 </div>
             </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="account__box account__box-wide" style="background: url({{ asset('assets/img/account/admin.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link">
+                        <a href="{{ path('admin') }}" class="button button__white">ADMINISTRATION</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
