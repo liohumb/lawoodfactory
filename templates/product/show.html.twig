@@ -1,44 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les produits • L&A WoodFactory{% endblock %}
+{% block title %}{{ product.title }} • L&A WoodFactory{% endblock %}
 
 {% block content %}
-    <section class="product section" id="product">
-        <div class="container">
-            <div class="container-inner">
-                <div class="main-content">
-                    <div class="main-headings" id="main-headings-js">
-                        <p id="by-line">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-                        <div class="heading">
-                            <h3 id="heading1">Decouvrez</h3>
-                            <h3 id="heading2">la Jeune,</h3>
-                            <h1 id="heading3">Beaute</h1>
+    <section class="product section section__bg" id="product">
+        <div class="product__mobile-container">
+            <div class="product__mobile-content">
+                <div class="product__mobile-images">
+                    <img src="{{ asset('uploads/' ~ product.illustrations[0].title) }}" alt="{{ product.title }}">
+                </div>
+                <div class="product__mobile-infos">
+                    <h3 class="product__mobile-subtitle">{{ product.subtitle }}</h3>
+                    <h1 class="product__mobile-title">{{ product.title }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="product__container">
+            <div class="product__content">
+                <div class="product__data">
+                    <div class="product__info" id="product__info">
+                        <div class="product__price">
+                            <a href="" class="button__icon">
+                                <span>{{ product.price | number_format(2, '€', '.') }}</span>
+                                <i class='bx bx-cart-add'></i>
+                            </a>
                         </div>
 
-                        <div class="short-bio">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore, repellat, quod sed optio nesciunt aspernatur inventore ab, nostrum accusantium harum dolor voluptate nulla!</p>
+                        {% if product.longueur and product.largeur is defined %}
+                            <p class="product__dimension">
+                                <i class='bx bx-ruler'></i>
+                                {{ product.longueur }}
+                                x
+                                {{ product.largeur }}
+                                cm
 
+                                •
+
+                                {{ product.poids | number_format(2, 'kg', '.') }}
+                                <i class='bx bx-dumbbell' ></i>
+                            </p>
+                        {% else %}
+                            <div class="product__dimension-alt">
+                                <i class='bx bx-dumbbell' ></i>
+                                {{ product.poids | number_format(2, 'kg', '.') }}
+                            </div>
+                        {% endif %}
+
+                        <div class="product__titles">
+                            <h3 class="product__intro">Découvrez<span>,</span></h3>
+                            <h3 class="product__subtitle">{{ product.subtitle }}</h3>
+                            <h1 class="product__title">{{ product.title }}</h1>
                         </div>
 
-                        <a href="#" class="link" onclick="readMore()">Read More</a>
+                        <div class="product__description-short" id="product__description-short">
+                            <p>{{ product.description | u.truncate(100, '...') }}</p>
+                        </div>
+
+                        <a href="#" class="product__description-show" id="product__description-show" onclick="readMore()">En savoir plus...</a>
                     </div>
 
-                    <div class="more-info " id="more-info-js">
-
-                        <h4>Lorem ipsum dolor sit.</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse expedita impedit iste, quibusdam debitis fugit repudiandae voluptatum vero quod nulla!</p>
-
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus iusto facere dignissimos quaerat facilis voluptatibus fuga quod impedit. Atque tenetur amet officia repudiandae odit.</p>
-
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni saepe suscipit deleniti porro fugit! Atque nisi alias a porro fugiat incidunt exercitationem! Nihil, consectetur. Expedita.</p>
+                    <div class="product__description " id="product__description">
+                        <p>{{ product.description }}</p>
                     </div>
 
                 </div>
 
-                <div class="image-wrapper">
-                    <div class="image-container">
-                        <img class="image" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=755bbb2b0afd5808494a8723774cd141" alt="image of a young woman.">
+                <div class="product__images">
+                    <div class="product__images-container">
+                        <img class="product__image" src="{{ asset('uploads/' ~ product.illustrations[0].title) }}" alt="{{ product.title }}">
                     </div>
                 </div>
             </div>
@@ -49,11 +78,15 @@
 {% block JavaScript %}
     <script>
         function readMore() {
-            let expandInfo = document.getElementById("more-info-js");
-            let mainHeadings = document.getElementById("main-headings-js");
+            let productDescriptionShort = document.getElementById("product__description-short");
+            let productDescriptionShow = document.getElementById("product__description-show");
+            let productDescription = document.getElementById("product__description");
+            let productInfo = document.getElementById("product__info");
 
-            mainHeadings.style.transform = "scale(0.7)";
-            expandInfo.style.height = "350px";
+            productDescriptionShow.style.display = "none";
+            productDescriptionShort.style.display = "none";
+            productInfo.style.transform = "scale(0.7)";
+            productDescription.style.height = "350px";
         }
     </script>
 {% endblock %}
