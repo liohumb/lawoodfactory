@@ -12,12 +12,10 @@
             <div class="swiper-wrapper">
                 {% for product in products %}
                     <article class="products__mobile-card swiper-slide" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
-                        <a href="{{ path('product_show', {slug: product.slug}) }}">
-                            <div class="products__data">
-                                <h1 class="products__title">{{ product.title }}</h1>
-                                <h3 class="products__subtitle">{{ product.subtitle }}</h3>
-                                <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
-                            </div>
+                        <a href="{{ path('product_show', {slug: product.slug}) }}" class="products__data">
+                            <h1 class="products__title">{{ product.title }}</h1>
+                            <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                            <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
                         </a>
                     </article>
                 {% endfor %}

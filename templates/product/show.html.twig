@@ -12,6 +12,20 @@
                 <div class="product__mobile-infos">
                     <h3 class="product__mobile-subtitle">{{ product.subtitle }}</h3>
                     <h1 class="product__mobile-title">{{ product.title }}</h1>
+                    <a href="" class="product__mobile-price">
+                        {{ product.price | number_format(2, '€', '.') }}
+                        <span>|</span>
+                        <i class='bx bx-cart-add'></i>
+                    </a>
+                    <p class="product__mobile-description">{{ product.description }}</p>
+                    <div class="product__mobile-dimensions">
+                        {% if product.longueur and product.largeur is defined %}
+                            <p class="product__mobile-dimension">{{ product.longueur }} x {{ product.largeur }} cm</p>
+                            <p class="product__mobile-dimension">{{ product.poids | number_format(2, 'kg', '.') }}</p>
+                        {% else %}
+                            <p class="product__mobile-dimension">{{ product.poids | number_format(2, 'kg', '.') }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,6 +86,57 @@
                 </div>
             </div>
         </div>
+        <div class="product__informations-container">
+            <div class="product__informations">
+                <div class="product__infos product__infos-one">
+                    {% if product.longueur and product.largeur is defined %}
+                        <p>
+                            {{ product.longueur }} cm
+                            <br> x <br>
+                            {{ product.largeur }} cm
+                        </p>
+                    {% else %}
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="L&A WoodFactory logo">
+                    {% endif %}
+                </div>
+                {% if product.illustrations | length > 1 %}
+                    <div class="product__infos product__infos-two" style="background: url({{ asset('uploads/' ~ product.illustrations[1].title) }}) no-repeat center center; background-size: cover;"></div>
+                    <div class="product__infos product__infos-three" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;"></div>
+                {% else %}
+                    <div class="product__infos product__infos-two" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;"></div>
+                    <div class="product__infos product__infos-three"></div>
+                {% endif %}
+                <div class="product__infos product__infos-four">
+                    <a href="">
+                        <p>{{ product.price | number_format(2, '€', '.') }}</p>
+                        <span>Ajouter au panier</span>
+                        <i class='bx bx-cart-add'></i>
+                    </a>
+                </div>
+                <div class="product__infos product__infos-five">
+                    <span>Poids :</span>
+                    <p>{{ product.poids | number_format(2, 'kg', '.') }}</p>
+                </div>
+                <div class="product__infos product__infos-six">
+                    <div class="product__infos-interaction">
+                        <a href="" class="product__infos-like">
+                            <i class='bx bx-heart'></i>
+                            <span>Aimer</span>
+                        </a>
+                        <a href="" class="product__infos-comment">
+                            <i class='bx bx-message-dots'></i>
+                            <span>Commenter</span>
+                        </a>
+                        <a href="" class="product__infos-share">
+                            <i class='bx bx-share' ></i>
+                            <span>Partager</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product__modal"></div>
+        <div class="product__modal-image"></div>
     </section>
 {% endblock %}
 
@@ -87,6 +152,53 @@
             productDescriptionShort.style.display = "none";
             productInfo.style.transform = "scale(0.7)";
             productDescription.style.height = "350px";
+        }
+
+        const buttonOne = document.querySelectorAll('.product__images-container');
+        const buttonTwo = document.querySelectorAll('.product__infos-two');
+        const buttonThree = document.querySelectorAll('.product__infos-three');
+        const modal = document.querySelector('.product__modal');
+        const image = document.querySelector('.product__modal-image');
+
+        modal.addEventListener('click', function(){
+            this.style.display = "none";
+            image.style.display = "none";
+        })
+
+        buttonOne.forEach(function(btn){
+            btn.addEventListener('click', function(){
+                modal.style.display = "block";
+                image.style.display = "block";
+                showImageOne();
+            })
+        })
+
+        function showImageOne(){
+            image.style.background = `url({{ asset('uploads/' ~ product.illustrations[0].title) }}) center / contain no-repeat`;
+        }
+
+        buttonTwo.forEach(function(btn){
+            btn.addEventListener('click', function(){
+                modal.style.display = "block";
+                image.style.display = "block";
+                showImageTwo();
+            })
+        })
+
+        function showImageTwo(){
+            image.style.background = `url({{ asset('uploads/' ~ product.illustrations[1].title) }}) center / contain no-repeat`;
+        }
+
+        buttonThree.forEach(function(btn){
+            btn.addEventListener('click', function(){
+                modal.style.display = "block";
+                image.style.display = "block";
+                showImageThree();
+            })
+        })
+
+        function showImageThree(){
+            image.style.background = `url({{ asset('uploads/' ~ product.illustrations[0].title) }}) center / contain no-repeat`;
         }
     </script>
 {% endblock %}
