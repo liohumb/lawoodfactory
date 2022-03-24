@@ -37,6 +37,7 @@ security:
     access_control:
         - { path: ^/administration, roles: ROLE_ADMIN }
         - { path: ^/votre-compte, roles: ROLE_USER }
+        - { path: ^/produit/aimer, roles: ROLE_USER }
 
 when@test:
     security:

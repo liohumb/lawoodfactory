@@ -103,8 +103,8 @@
                     <div class="product__infos product__infos-two" style="background: url({{ asset('uploads/' ~ product.illustrations[1].title) }}) no-repeat center center; background-size: cover;"></div>
                     <div class="product__infos product__infos-three" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;"></div>
                 {% else %}
-                    <div class="product__infos product__infos-two" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;"></div>
-                    <div class="product__infos product__infos-three"></div>
+                    <div class="product__infos product__infos-twoAlt" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;"></div>
+                    <div class="product__infos product__infos-threeAlt"></div>
                 {% endif %}
                 <div class="product__infos product__infos-four">
                     <a href="">
@@ -119,8 +119,12 @@
                 </div>
                 <div class="product__infos product__infos-six">
                     <div class="product__infos-interaction">
-                        <a href="" class="product__infos-like">
-                            <i class='bx bx-heart'></i>
+                        <a href="{{ path('product_like', {slug: product.slug}) }}" class="product__infos-like">
+                            {% if app.user and product.isLikedByUser(app.user) %}
+                                <i class='bx bxs-heart'></i>
+                            {% else %}
+                                <i class='bx bx-heart'></i>
+                            {% endif %}
                             <span>Aimer</span>
                         </a>
                         <a href="" class="product__infos-comment">
@@ -141,7 +145,9 @@
 {% endblock %}
 
 {% block JavaScript %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        // EN SAVOIR PLUS BUTTON
         function readMore() {
             let productDescriptionShort = document.getElementById("product__description-short");
             let productDescriptionShow = document.getElementById("product__description-show");
@@ -154,8 +160,10 @@
             productDescription.style.height = "350px";
         }
 
+        // MODAL ZOOM IMAGES
         const buttonOne = document.querySelectorAll('.product__images-container');
         const buttonTwo = document.querySelectorAll('.product__infos-two');
+        const buttonTwoAlt = document.querySelectorAll('.product__infos-twoAlt');
         const buttonThree = document.querySelectorAll('.product__infos-three');
         const modal = document.querySelector('.product__modal');
         const image = document.querySelector('.product__modal-image');
@@ -173,32 +181,63 @@
             })
         })
 
-        function showImageOne(){
-            image.style.background = `url({{ asset('uploads/' ~ product.illustrations[0].title) }}) center / contain no-repeat`;
-        }
+        {% if product.illustrations | length > 1 %}
+            buttonTwo.forEach(function(btn){
+                btn.addEventListener('click', function(){
+                    modal.style.display = "block";
+                    image.style.display = "block";
+                    showImageTwo();
+                })
+            })
 
-        buttonTwo.forEach(function(btn){
+            function showImageTwo(){
+                image.style.background = `url({{ asset('uploads/' ~ product.illustrations[1].title) }}) center / contain no-repeat`;
+            }
+        {% endif %}
+
+        buttonTwoAlt.forEach(function(btn){
             btn.addEventListener('click', function(){
                 modal.style.display = "block";
                 image.style.display = "block";
-                showImageTwo();
+                showImageOne();
             })
         })
-
-        function showImageTwo(){
-            image.style.background = `url({{ asset('uploads/' ~ product.illustrations[1].title) }}) center / contain no-repeat`;
-        }
 
         buttonThree.forEach(function(btn){
             btn.addEventListener('click', function(){
                 modal.style.display = "block";
                 image.style.display = "block";
-                showImageThree();
+                showImageOne();
             })
         })
 
-        function showImageThree(){
+        function showImageOne(){
             image.style.background = `url({{ asset('uploads/' ~ product.illustrations[0].title) }}) center / contain no-repeat`;
         }
+
+        // LIKE BUTTON
+        function onClickBtnLike(event) {
+            event.preventDefault();
+
+            const url = this.href;
+            const icon = this.querySelector('i');
+
+            axios.get(url).then(function (response) {
+                if (icon.classList.contains('bxs-heart')) {
+                    icon.classList.replace('bxs-heart', 'bx-heart');
+                } else {
+                    icon.classList.replace('bx-heart', 'bxs-heart');
+                }
+            }).catch(function (error) {
+                if (error.response.status === 403) {
+                    window.alert("Vous ne pouvez pas aimer un produit si vous n'êtes pas connecté.");
+                } else {
+                    window.alert("Une erreur s'est produite, merci de réessayer plus tard.");
+                }
+            });
+        }
+        document.querySelectorAll('a.product__infos-like').forEach(function (link) {
+            link.addEventListener('click', onClickBtnLike);
+        })
     </script>
 {% endblock %}
