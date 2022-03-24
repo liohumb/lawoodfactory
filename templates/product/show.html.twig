@@ -119,17 +119,24 @@
                 </div>
                 <div class="product__infos product__infos-six">
                     <div class="product__infos-interaction">
-                        <a href="{{ path('product_like', {slug: product.slug}) }}" class="product__infos-like">
-                            {% if app.user and product.isLikedByUser(app.user) %}
-                                <i class='bx bxs-heart'></i>
-                            {% else %}
+                        {% if app.user %}
+                            <a href="{{ path('product_like', {slug: product.slug}) }}" class="product__infos-like">
+                                {% if app.user and product.isLikedByUser(app.user) %}
+                                    <i class='bx bxs-heart'></i>
+                                {% else %}
+                                    <i class='bx bx-heart'></i>
+                                {% endif %}
+                                <span>Aimer</span>
+                            </a>
+                        {% else %}
+                            <a href="#product__comments-container" class="product__infos-likeAlt">
                                 <i class='bx bx-heart'></i>
-                            {% endif %}
-                            <span>Aimer</span>
-                        </a>
-                        <a href="" class="product__infos-comment">
+                                <span>Aimer</span>
+                            </a>
+                        {% endif %}
+                        <a href="#product__comments-container" class="product__infos-comment">
                             <i class='bx bx-message-dots'></i>
-                            <span>Commenter</span>
+                            <span>Donnez votre avis</span>
                         </a>
                         <a href="" class="product__infos-share">
                             <i class='bx bx-share' ></i>
@@ -141,6 +148,94 @@
         </div>
         <div class="product__modal"></div>
         <div class="product__modal-image"></div>
+        <div class="product__comments-container" id="product__comments-container">
+            {% if notification %}
+                <h3 class="product__comments-subtitle">{{ notification }}</h3>
+            {% else %}
+                {% if app.user %}
+                    <h3 class="product__comments-subtitle">
+                        Donnez votre avis sur “{{ product.title }}”
+                    </h3>
+                {% else %}
+                    <h3 class="product__comments-subtitle">
+                        Pour aimer ou donner votre avis sur “{{ product.title }}” <br>
+                        merci de <a href="{{ path('login') }}">vous connecter</a>
+                    </h3>
+                {% endif %}
+            {% endif %}
+
+            {% if product.comments | length >= 1 %}
+                <div class="product__comments">
+                    <h1 class="product__comments-title">
+                        Ils vous disent tout <br>
+                        sur “{{ product.title }}” !!
+                    </h1>
+                    <div class="product__comments-comment">
+                        {% for comment in product.comments %}
+                            {% if comment.active == 1 %}
+                                {% if comment.parent == null %}
+                                    <div class="product__comment">
+                                        <p>{{ comment.content }}</p>
+                                        <div class="product__comment-info">
+                                            {% if app.user %}
+                                                {% if comment.user.firstname == app.user.firstname %}
+                                                    <p>écrit par vous, </p>
+                                                {% else %}
+                                                    <p>écrit par : {{ comment.user.firstname }}, </p>
+                                                {% endif %}
+                                            {% else %}
+                                                <p>écrit par : {{ comment.user.firstname }}, </p>
+                                            {% endif %}
+                                            <span>le {{ comment.createdAt | date("d/m/Y H:i", "Europe/Paris") }} • </span>
+                                            <a href="#product__comment-form" data-reply data-id="{{ comment.id }}">répondre</a>
+                                        </div>
+                                    </div>
+                                    {% for reply in comment.replies %}
+                                        {% if reply.active ==1 %}
+                                            <div class="product__comment-reply">
+                                                <p>{{ reply.content }}</p>
+                                                <div class="product__comment-info">
+                                                    {% if app.user %}
+                                                        {% if reply.user.firstname == app.user.firstname %}
+                                                            <p>votre réponse, </p>
+                                                        {% else %}
+                                                            <p>répondu par : {{ reply.user.firstname }}, </p>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <p>répondu par : {{ reply.user.firstname }}, </p>
+                                                    {% endif %}
+                                                    <span>le {{ reply.createdAt | date("d/m/Y H:i", "Europe/Paris") }}</span>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="product__comment-add">
+                    <div class="product__comment-form" id="product__comment-form">
+                        {{ form_start(form) }}
+                        <div class="form__inputs">
+                            <div class="form__content form__area">
+                                {{ form_widget(form.content, { 'value' : '' }) }}
+                                {{ form_label(form.content) }}
+                            </div>
+                            {{ form_errors(form.content) }}
+                        </div>
+
+                        <button class="button">
+                            Commenter
+                        </button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
     </section>
 {% endblock %}
 
@@ -222,7 +317,7 @@
             const url = this.href;
             const icon = this.querySelector('i');
 
-            axios.get(url).then(function (response) {
+            axios.get(url).then(function () {
                 if (icon.classList.contains('bxs-heart')) {
                     icon.classList.replace('bxs-heart', 'bx-heart');
                 } else {
@@ -239,5 +334,14 @@
         document.querySelectorAll('a.product__infos-like').forEach(function (link) {
             link.addEventListener('click', onClickBtnLike);
         })
+
+        // COMMENT REPLY
+        window.onload = () => {
+            document.querySelectorAll('[data-reply]').forEach(element => {
+                element.addEventListener('click', function () {
+                    document.querySelector('#comment_parentid').value = this.dataset.id;
+                })
+            });
+        }
     </script>
 {% endblock %}

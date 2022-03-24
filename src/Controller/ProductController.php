@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Like;
 use App\Entity\Product;
+use App\Form\CommentType;
 use App\Repository\LikeRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,18 +41,48 @@ class ProductController extends AbstractController
     /**
      * @Route("/produit/{slug}", name="product_show")
      * @param $slug
+     * @param Request $request
      * @return Response
      */
-    public function show($slug): Response
+    public function show($slug, Request $request): Response
     {
+        $notification = null;
+
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
 
         if (!$product) {
             return $this->redirectToRoute('product');
         }
 
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setActive(true);
+            $comment->setProduct($product);
+            $comment->setUser($this->getUser());
+
+            $parentId = $form->get('parentid')->getData();
+
+            if ($parentId !== null) {
+                $parent = $this->entityManager->getRepository(Comment::class)->find($parentId);
+            }
+
+            $comment->setParent($parent ?? null);
+
+            $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+
+            $notification = "Votre commentaire a bien été publié";
+        }
+
         return $this->render('product/show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'comments' => $comment,
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 
