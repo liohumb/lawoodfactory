@@ -10,6 +10,7 @@ use App\Repository\LikeRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -126,5 +127,22 @@ class ProductController extends AbstractController
             'message' => 'Like bien ajouté',
             'likes' => $likeRepository->count(['product' => $product])
         ], 200);
+    }
+
+    /**
+     * @Route("/produit/commentaire/{id}/supprimer", name="product__comment_delete")
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deleteComment($id): RedirectResponse
+    {
+        $comment = $this->entityManager->getRepository(Comment::class)->findOneById($id);
+
+        if ($comment) {
+            $this->entityManager->remove($comment);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('product_show', ['slug' => $comment->getProduct()->getSlug()]);
     }
 }

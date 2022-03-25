@@ -174,7 +174,7 @@
                         {% for comment in product.comments %}
                             {% if comment.active == 1 %}
                                 {% if comment.parent == null %}
-                                    <div class="product__comment">
+                                    <div class="product__comment" id="{{ comment.id }}">
                                         <p>{{ comment.content }}</p>
                                         <div class="product__comment-info">
                                             {% if app.user %}
@@ -188,11 +188,15 @@
                                             {% endif %}
                                             <span>le {{ comment.createdAt | date("d/m/Y H:i", "Europe/Paris") }} • </span>
                                             <a href="#product__comment-form" data-reply data-id="{{ comment.id }}">répondre</a>
+                                            {% if comment.user == app.user %}
+                                                <span> • </span>
+                                                <a href="{{ path('product__comment_delete', {id: comment.id}) }}" class="product__comment-delete">supprimer</a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     {% for reply in comment.replies %}
                                         {% if reply.active ==1 %}
-                                            <div class="product__comment-reply">
+                                            <div class="product__comment-reply" id="{{ reply.id }}">
                                                 <p>{{ reply.content }}</p>
                                                 <div class="product__comment-info">
                                                     {% if app.user %}
@@ -205,6 +209,10 @@
                                                         <p>répondu par : {{ reply.user.firstname }}, </p>
                                                     {% endif %}
                                                     <span>le {{ reply.createdAt | date("d/m/Y H:i", "Europe/Paris") }}</span>
+                                                    {% if reply.user == app.user %}
+                                                        <span> • </span>
+                                                        <a href="{{ path('product__comment_delete', {id: reply.id}) }}" class="product__comment-delete">supprimer</a>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         {% endif %}

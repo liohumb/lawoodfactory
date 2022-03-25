@@ -111,6 +111,7 @@ class PasswordController extends AbstractController
      * @Route("/modifier-mon-mot-de-passe/{token}", name="update_password")
      * @param Request $request
      * @param $token
+     * @param UserPasswordHasherInterface $hasher
      * @return Response
      */
     public function update(Request $request, $token, UserPasswordHasherInterface $hasher): Response

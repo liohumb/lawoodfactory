@@ -1,20 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LikeController!{% endblock %}
+{% block title %}Vos produits aimés • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="products section section__bg" id="products">
+        {% if user.likes | length == 0 %}
+            <h2 class="products__section-titleEmpty">
+                Vous n'avez pas encore aimé de produit...
+            </h2>
+        {% else %}
+            <h2 class="products__section-title">
+                Vos Produits Coup de Cœur
+            </h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="products__mobile-container container swiper">
+                <div class="swiper-wrapper">
+                    {% for product in user.likes %}
+                        <article class="products__mobile-card swiper-slide" style="background: url({{ asset('uploads/' ~ product.product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                            <a href="{{ path('product_show', {slug: product.product.slug}) }}" class="products__data">
+                                <h1 class="products__title">{{ product.product.title }}</h1>
+                                <h3 class="products__subtitle">{{ product.product.subtitle }}</h3>
+                                <h3 class="products__price">{{ product.product.price | number_format(2, '€', '.') }}</h3>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Account/LikeController.php'|file_link(0) }}">src/Controller/Account/LikeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/account/like/index.html.twig'|file_link(0) }}">templates/account/like/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="products__container container">
+                <div class="products__content grid">
+                    {% for product in user.likes %}
+                        <article class="products__card" style="background: url({{ asset('uploads/' ~ product.product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                            <a href="{{ path('product_show', {slug: product.product.slug}) }}">
+                                <div class="products__data">
+                                    <h1 class="products__title">{{ product.product.title }}</h1>
+                                    <h3 class="products__subtitle">{{ product.product.subtitle }}</h3>
+                                    <h3 class="products__price">{{ product.product.price | number_format(2, '€', '.') }}</h3>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}

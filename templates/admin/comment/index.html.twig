@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommentController!{% endblock %}
+{% block title %}Commentaires • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Vos produits</h2>
+        <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
+        <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir voir, activer, désactiver et supprimer un commentaire.</h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Admin/CommentController.php'|file_link(0) }}">src/Controller/Admin/CommentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/admin/comment/index.html.twig'|file_link(0) }}">templates/admin/comment/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="account__comment-container">
+            <ul class="responsive-table">
+                <li class="table-header">
+                    <div class="col col-1">Activer</div>
+                    <div class="col col-2">Commentaire</div>
+                    <div class="col col-3">À propos de</div>
+                    <div class="col col-4">De</div>
+                    <div class="col col-5"> </div>
+                </li>
+                {% for comment in comments %}
+                    <li class="table-row">
+                        <div class="col col-1" data-label="Activer">
+                            {% if comment.active == 0 %}
+                                <a href="{{ path('admin_comment_active', {id: comment.id}) }}"><i class='bx bx-message-x' ></i></a>
+                            {% else %}
+                                <a href="{{ path('admin_comment_active', {id: comment.id}) }}"><i class='bx bx-message-check' ></i></a>
+                            {% endif %}
+                        </div>
+                        <div class="col col-2" data-label="Commentaire">{{ comment.content | u.truncate(32, '...') }}</div>
+                        <div class="col col-3" data-label="À propos de"><a href="{{ path('product_show', {slug: comment.product.slug}) }}#{{ comment.id }}">{{ comment.product.title }}</a></div>
+                        <div class="col col-4" data-label="De">{{ comment.user.firstname }} {{ comment.user.lastname }}</div>
+                        <div class="col col-5" data-label=" "><a href="{{ path('admin_comment_delete', {id: comment.id}) }}"><i class='bx bx-trash'></i></a></div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 {% endblock %}

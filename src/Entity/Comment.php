@@ -49,6 +49,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="replies")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $parent;
 

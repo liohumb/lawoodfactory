@@ -8,16 +8,16 @@
 
         <div class="account__container-mobile grid">
             <a href="">
-                <div class="account__box" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
-                        <span class="button button__white">VOIR LES UTILISATEURS</span>
+                        <span class="button button__white">GÉRER LES COMMANDES</span>
                     </div>
                 </div>
             </a>
             <a href="">
-                <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
-                        <span class="button button__white">GÉRER LES COMMANDES</span>
+                        <span class="button button__white">VOIR LES UTILISATEURS</span>
                     </div>
                 </div>
             </a>
@@ -32,6 +32,13 @@
                 <div class="account__box" style="background: url({{ asset('assets/img/admin/carrer.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
                         <span class="button button__white">GÉRER LES TRANSPORTEURS</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ path('admin_comment') }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/admin/comment.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">GÉRER LES COMMENTAIRES</span>
                     </div>
                 </div>
             </a>
@@ -52,37 +59,43 @@
         </div>
 
         <div class="account__admin-container grid">
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
-                <div class="account__link">
-                    <a href="#" class="button button__white">VOIR LES UTILISATEURS</a>
-                </div>
-            </div>
-
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__admin-order" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="#" class="button button__white">GÉRER LES COMMANDES</a>
                 </div>
             </div>
 
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/product.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__admin-user" style="background: url({{ asset('assets/img/admin/user.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">VOIR LES UTILISATEURS</a>
+                </div>
+            </div>
+
+            <div class="account__box account__admin-product" style="background: url({{ asset('assets/img/admin/product.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="{{ path('admin_product') }}" class="button button__white">GÉRER LES PRODUITS</a>
                 </div>
             </div>
 
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/carrer.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__admin-carrier" style="background: url({{ asset('assets/img/admin/carrer.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="" class="button button__white">GÉRER LES TRANSPORTEURS</a>
                 </div>
             </div>
 
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/condition.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__admin-comment" style="background: url({{ asset('assets/img/admin/comment.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="{{ path('admin_comment') }}" class="button button__white">GÉRER LES COMMENTAIRES</a>
+                </div>
+            </div>
+
+            <div class="account__box account__admin-condition" style="background: url({{ asset('assets/img/admin/condition.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="" class="button button__white">CONDITIONS GÉNÉRALES</a>
                 </div>
             </div>
 
-            <div class="account__box" style="background: url({{ asset('assets/img/admin/logo.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__admin-home" style="background: url({{ asset('assets/img/admin/logo.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="{{ path('home') }}" class="button button__white">RETOUR AU SITE</a>
                 </div>

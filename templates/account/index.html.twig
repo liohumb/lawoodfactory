@@ -28,6 +28,20 @@
                     </div>
                 </div>
             </a>
+            <a href="{{ path('account_like', {id: app.user.id}) }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/account/like.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">PRODUITS AIMÉS</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ path('home') }}">
+                <div class="account__box" style="background: url({{ asset('assets/img/account/logo.jpg') }}) no-repeat center center; background-size: cover;">
+                    <div class="account__link-mobile">
+                        <span class="button button__white">RETOUR AU SITE</span>
+                    </div>
+                </div>
+            </a>
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('admin') }}">
                     <div class="account__box" style="background: url({{ asset('assets/img/account/admin.jpg') }}) no-repeat center center; background-size: cover;">
@@ -40,21 +54,33 @@
         </div>
 
         <div class="account__container grid">
-            <div class="account__box" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
-                <div class="account__link">
-                    <a href="#" class="button button__white">VOIR LES COMMANDES</a>
-                </div>
-            </div>
-
-            <div class="account__box" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__box-address" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="#" class="button button__white">GÉRER LES ADRESSES</a>
                 </div>
             </div>
 
-            <div class="account__box" style="background: url({{ asset('assets/img/account/password.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="account__box account__box-password" style="background: url({{ asset('assets/img/account/password.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
                     <a href="{{ path('account_password') }}" class="button button__white">MODIFIER LE MOT DE PASSE</a>
+                </div>
+            </div>
+
+            <div class="account__box account__box-order" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="#" class="button button__white">VOIR LES COMMANDES</a>
+                </div>
+            </div>
+
+            <div class="account__box account__box-like" style="background: url({{ asset('assets/img/account/like.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="{{ path('account_like', {id: app.user.id}) }}" class="button button__white">PRODUITS AIMÉS</a>
+                </div>
+            </div>
+
+            <div class="account__box account__box-home" style="background: url({{ asset('assets/img/account/logo.jpg') }}) no-repeat center center; background-size: cover;">
+                <div class="account__link">
+                    <a href="{{ path('home') }}" class="button button__white">RETOUR AU SITE</a>
                 </div>
             </div>
             {% if is_granted('ROLE_ADMIN') %}
