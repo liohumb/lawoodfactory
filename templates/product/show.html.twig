@@ -138,16 +138,32 @@
                             <i class='bx bx-message-dots'></i>
                             <span>Donnez votre avis</span>
                         </a>
-                        <a href="" class="product__infos-share">
+                        <div class="product__infos-share">
                             <i class='bx bx-share' ></i>
                             <span>Partager</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="product__modal"></div>
         <div class="product__modal-image"></div>
+
+        <div class="product__share-modal"></div>
+        <div class="product__share-option">
+            <div class="product__share-container">
+                <h3 class="product__share-title">Pour partager “{{ product.title }}”, <br>copier le lien et coller le où vous voulez !</h3>
+                <div class="form__inputs product__share-form">
+                    <div class="form__content">
+                        <input type="text" id="product_share" class="form__input" value="https://lawoodfactory.fr/produit/{{ product.slug }}">
+                        <label for="product_share" class="form__label">Le lien vers {{ product.title }}</label>
+                    </div>
+                    <button class="button product__share-button">Copier le lien</button>
+                </div>
+            </div>
+        </div>
+
         <div class="product__comments-container" id="product__comments-container">
             {% if notification %}
                 <h3 class="product__comments-subtitle">{{ notification }}</h3>
@@ -317,6 +333,37 @@
         function showImageOne(){
             image.style.background = `url({{ asset('uploads/' ~ product.illustrations[0].title) }}) center / contain no-repeat`;
         }
+
+        // MODAL SHARE
+        const buttonShare = document.querySelectorAll('.product__infos-share');
+        const modalShare = document.querySelector('.product__share-modal');
+        const optionShare = document.querySelector('.product__share-option');
+
+        modalShare.addEventListener('click', function () {
+            this.style.display = "none";
+            optionShare.style.display = "none";
+        })
+
+        buttonShare.forEach(function (btnShare) {
+            btnShare.addEventListener('click', function () {
+                modalShare.style.display = "block";
+                optionShare.style.display = "block";
+            })
+        })
+
+        // SHARE BUTTON
+        const input = document.querySelector('input');
+        const button = document.querySelector('button');
+
+        input.addEventListener('click', function () {
+            input.select()
+        })
+
+        button.addEventListener('click', function () {
+            input.select();
+            document.execCommand('copy');
+            alert("Le lien a bien été copié ! \nIl ne vous reste plus qu'à le coller. ");
+        })
 
         // LIKE BUTTON
         function onClickBtnLike(event) {
