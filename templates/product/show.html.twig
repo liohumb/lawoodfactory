@@ -12,7 +12,7 @@
                 <div class="product__mobile-infos">
                     <h3 class="product__mobile-subtitle">{{ product.subtitle }}</h3>
                     <h1 class="product__mobile-title">{{ product.title }}</h1>
-                    <a href="" class="product__mobile-price">
+                    <a href="{{ path('cart_add', {id: product.id}) }}" class="product__mobile-price">
                         {{ product.price | number_format(2, '€', '.') }}
                         <span>|</span>
                         <i class='bx bx-cart-add'></i>
@@ -34,7 +34,7 @@
                 <div class="product__data">
                     <div class="product__info" id="product__info">
                         <div class="product__price">
-                            <a href="" class="button__icon">
+                            <a href="{{ path('cart_add', {id: product.id}) }}" class="button__icon">
                                 <span>{{ product.price | number_format(2, '€', '.') }}</span>
                                 <i class='bx bx-cart-add'></i>
                             </a>
@@ -107,7 +107,7 @@
                     <div class="product__infos product__infos-threeAlt"></div>
                 {% endif %}
                 <div class="product__infos product__infos-four">
-                    <a href="">
+                    <a href="{{ path('cart_add', {id: product.id}) }}">
                         <p>{{ product.price | number_format(2, '€', '.') }}</p>
                         <span>Ajouter au panier</span>
                         <i class='bx bx-cart-add'></i>
