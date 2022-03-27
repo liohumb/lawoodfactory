@@ -4,43 +4,47 @@
 
 {% block content %}
     <section class="cart section">
-        <div class="wrapper">
-            <h1>Shopping Cart</h1>
-            <div class="project">
-                <div class="shop">
-                    {% set total = null %}
-                    {% for product in cart %}
-                        <div class="box">
-                            <img src="{{ asset('uploads/' ~ product.product.illustrations[0].title) }}" alt="{{ product.product.title }}">
-                            <div class="content">
-                                <h3>{{ product.product.title }}</h3>
-                                <h4>
-                                    {{ (product.product.price * product.quantity) | number_format(2, '€', '.') }}
-                                    <span>( {{ product.product.price | number_format(2, '€', '.') }} )</span>
-                                </h4>
-                                <div class="unit">
-                                    <i class='bx bx-minus'></i>
-                                    x {{ product.quantity }}
-                                    <i class='bx bx-plus' ></i>
-                                </div>
-                                <div class="btn-area">
-                                    <i class='bx bx-trash' ></i>
+        {% if cart | length > 0 %}
+            <div class="cart__container">
+                <h1>Votre panier</h1>
+                <div class="cart__content">
+                    <div class="cart__product">
+                        {% set total = null %}
+                        {% for product in cart %}
+                            <div class="cart__product-box">
+                                <img src="{{ asset('uploads/' ~ product.product.illustrations[0].title) }}" alt="{{ product.product.title }}">
+                                <div class="cart__product-infos">
+                                    <h3>{{ product.product.title }}</h3>
+                                    <h4>
+                                        {{ (product.product.price * product.quantity) | number_format(2, '€', '.') }}
+                                        <span>( {{ product.product.price | number_format(2, '€', '.') }} )</span>
+                                    </h4>
+                                    <div class="cart__product-quantity">
+                                        <a href="{{ path('cart_decrease', {id: product.product.id}) }}">
+                                            <i class='bx bx-minus'></i>
+                                        </a>
+                                        <span>x {{ product.quantity }}</span>
+                                        <a href="{{ path('cart_add', {id: product.product.id}) }}">
+                                            <i class='bx bx-plus' ></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {% set total = total + ( product.product.price * product.quantity ) %}
-                    {% endfor %}
-                </div>
-                <div class="right-bar">
-                    <p><span>Nombre de produit(s):</span> <span>{{ cart | length }}</span></p>
-                    <hr>
-                    <p><span>Tax (5%)</span> <span>$6</span></p>
-                    <hr>
-                    <p><span>Shipping</span> <span>$15</span></p>
-                    <hr>
-                    <p><span>Total</span> <span>{{ total | number_format(2, '€', '.') }}</span></p><a href="#"><i class="fa fa-shopping-cart"></i>Checkout</a>
+                            {% set total = total + ( product.product.price * product.quantity ) %}
+                        {% endfor %}
+                    </div>
+                    <div class="cart__recap">
+                        <h3>{{ cart | length }} produit(s) dans le panier</h3>
+                        <p><span>Total :</span> <span>{{ total | number_format(2, '€', '.') }}</span></p>
+                        <a href="" class="button">Valider votre panier</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="cart__container-empty">
+                <h1>Votre panier est vide</h1>
+                <a href="{{ path('product') }}" class="button">Retour aux produits</a>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
