@@ -914,6 +914,10 @@ margin: .4rem 0 0 0;
   margin: 0 0 1rem 0;
 }
 
+.account__link-titleCarrier {
+  margin: 20% auto;
+}
+
 .account__comment-container {
   max-width: 1000px;
   margin-left: auto;

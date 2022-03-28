@@ -1,0 +1,43 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Ajout transporteur • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__box-product template__border-lt" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">Nouveau Transporteur</h1>
+                    <h3 class="template__box-subtitle">Compléter le formulaire pour ajouter un nouveau transporteur</h3>
+                    <span class="template__box-detail">
+                        <a href="{{ path('admin_carrier') }}">retour</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="template__form template__form-product template__border-rb">
+                {{ form_start(form) }}
+                <div class="form__inputs">
+                    <div class="form__content">
+                        {{ form_widget(form.name) }}
+                        {{ form_label(form.name) }}
+                    </div>
+                    <div class="form__content form__area">
+                        {{ form_widget(form.description) }}
+                        {{ form_label(form.description) }}
+                    </div>
+                    <div class="form__content">
+                        {{ form_widget(form.price) }}
+                        {{ form_label(form.price) }}
+                    </div>
+                </div>
+
+                <button class="button">
+                    Ajouter
+                </button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
