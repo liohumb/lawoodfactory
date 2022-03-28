@@ -1,18 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une adresse • L&A WoodFactory{% endblock %}
+{% block title %}Modifier une adresse • L&A WoodFactory{% endblock %}
 
 {% block content %}
     <section class="template section container" id="template">
         <div class="template__container grid">
-            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
-                <div class="template__box-bg template__border-lt">
-                    <h1 class="template__box-title">Nouvelle Adresse</h1>
-                    <h3 class="template__box-subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir ajouter une nouvelle adresse.</h3>
-                </div>
-            </div>
-
-            <div class="template__form template__form-address template__border-rb">
+            <div class="template__form template__form-product template__border-lt">
                 {{ form_start(form) }}
                 <div class="form__inputs">
                     <div class="form__content">
@@ -60,11 +53,24 @@
                 </div>
 
                 <button class="button">
-                    Ajouter
+                    Modifier
                 </button>
                 {{ form_end(form) }}
+            </div>
+
+            <div class="template__box template__box-product template__border-rb" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-rb">
+                    <h1 class="template__box-title">Modifier une adresse</h1>
+                    <h3 class="template__box-subtitle">Éditer le formulaire pour modifier votre adresse</h3>
+                    <a href="{{ path('account_address_delete', {addressId: address.id, id: app.user.id}) }}" class="button__delete">Supprimer</a>
+                    <h3 class="template__box-subtitle">Vous avez aussi la possibilité de supprimer cette adresse. Attention! Cette action est irreversible!!</h3>
+                    <span class="template__box-detail">
+                        <a href="{{ path('account_address', {id: app.user.id}) }}">retour</a>
+                    </span>
+                </div>
             </div>
         </div>
     </section>
 {% endblock %}
+
 

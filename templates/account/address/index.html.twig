@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AddressController!{% endblock %}
+{% block title %}Vos adresses • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="address section section__bg" id="address">
+        {% if user.addresses | length == 0 %}
+            <div class="address__container-empty">
+                <h1>Vous n'avez pas encore renseigné d'adresse...</h1>
+                <a href="{{ path('account_address_add') }}" class="button">Ajouter une adresse</a>
+            </div>
+        {% else %}
+            <div class="address__container">
+                <h1 class="address__container-title">Vos adresses</h1>
+                <h3 class="address__container-subtitle">
+                    {{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir gérer vos adresses.<br>
+                    (cliquez dessus pour la modifier ou la supprimer)
+                </h3>
+                <div class="address__content grid">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Account/AddressController.php'|file_link(0) }}">src/Controller/Account/AddressController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/account/address/index.html.twig'|file_link(0) }}">templates/account/address/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    <div class="address__card">
+                        <a href="{{ path('account_address_add', {id: app.user.id}) }}">
+                            <div class="address__data">
+                                <h1 class="address__add">Ajouter une nouvelle adresse</h1>
+                                <i class='bx bx-plus'></i>
+                            </div>
+                        </a>
+                    </div>
+                    {% for address in user.addresses %}
+                        <div class="address__card">
+                            <a href="{{ path('account_address_edit', {addressId: address.id, id: app.user.id}) }}">
+                                <div class="address__data">
+                                    <h1 class="address__title">{{ address.title }}</h1>
+                                    <h3 class="address__address">{{ address.address }}</h3>
+                                    <div class="address__code-city">
+                                        <h5 class="address__postcode">{{ address.postcode }}</h5>
+                                        <span> | </span>
+                                        <h5 class="address__city">{{ address.city }}</h5>
+                                    </div>
+                                    <h5 class="address__phone">{{ address.phone }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}

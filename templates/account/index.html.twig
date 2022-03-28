@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </a>
-            <a href="">
+            <a href="{{ path('account_address', {id: app.user.id}) }}">
                 <div class="account__box" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
                         <span class="button button__white">GÉRER LES ADRESSES</span>
@@ -56,7 +56,7 @@
         <div class="account__container grid">
             <div class="account__box account__box-address" style="background: url({{ asset('assets/img/account/address.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
-                    <a href="#" class="button button__white">GÉRER LES ADRESSES</a>
+                    <a href="{{ path('account_address', {id: app.user.id}) }}" class="button button__white">GÉRER LES ADRESSES</a>
                 </div>
             </div>
 
