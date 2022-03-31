@@ -1,20 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}Paiement de votre commande • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Order/OrderController.php'|file_link(0) }}">src/Controller/Order/OrderController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/order/order/index.html.twig'|file_link(0) }}">templates/order/order/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block content %}
+    <section class="order section section__bg">
+        <h1 class="order__title">Paiement de votre commande</h1>
+        <h3 class="order__subtitle">Plus qu'une étape et on s'occupe du reste !</h3>
+        <div class="order__container">
+            <div class="order__content">
+                <div class="order__box order__box-address">
+                    <h3 class="order__box-title">Votre adresse de livraison</h3>
+                    <div class="order__box-addressContent">
+                        <h3 class="order__box-addressName">{{ delivery.firstname }} {{ delivery.lastname }}</h3>
+                        {% if delivery.company is defined %}
+                            <h4 class="order__box-addressCompany">{{ delivery.company }}</h4>
+                        {% endif %}
+                        <p class="order__box-addressAddress">{{ delivery.address }}</p>
+                        <p class="order__box-addressPostCity">{{ delivery.postcode }} — {{ delivery.city }}</p>
+                        <h6 class="order__box-addressPhone">{{ delivery.phone }}</h6>
+                    </div>
+                </div>
+                <div class="order__box order__box-logo" style="background: url({{ asset('assets/img/account/logo.jpg') }}) no-repeat center center; background-size: cover;"></div>
+                <div class="order__box order__box-carrier">
+                    <h3 class="order__box-title">Votre transporteur</h3>
+                    <div class="order__box-carrierContent">
+                        <h4 class="order__box-carrierName">{{ carrier.name }}</h4>
+                        <p class="order__box-carrierDescription">{{ carrier.description }}</p>
+                        <h6 class="order__box-carrierPrice">{{ carrier.price | number_format(2, '€', '.') }}</h6>
+                    </div>
+                </div>
+                <div class="order__box order__box-recap">
+                    <div class="order__recap">
+                        <h3 class="order__box-title">Votre commande</h3>
+                        {% set total = null %}
+                        {% set totalProduct = null %}
+                        {% for product in cart %}
+                            <div class="order__recap-product">
+                                <img src="{{ asset('uploads/' ~ product.product.illustrations[0].title) }}" alt="{{ product.product.title }}">
+                                <div class="order__recap-productInfos">
+                                    <h1 class="order__recap-productTitle">{{ product.product.title }} <span>(x {{ product.quantity }})</span></h1>
+                                    <h3 class="order__recap-productSubtitle">{{ product.product.subtitle }}</h3>
+                                    <p class="order__recap-productDescription">{{ product.product.description | u.truncate(55, '...') }}</p>
+                                    <h4 class="order__recap-productPrice">
+                                        {{ (product.product.price * product.quantity) | number_format(2, '€', '.') }}
+                                        {% if product.quantity > 1 %}
+                                            <span>({{ product.product.price | number_format(2, '€', '.') }})</span>
+                                        {% endif %}
+                                    </h4>
+                                </div>
+                            </div>
+                            {% set total = total + (product.product.price * product.quantity) %}
+                        {% endfor %}
+                    </div>
+                    <div class="order__price">
+                        <p class="order__price-subtotal"><span>Sous-total :</span> <span>{{ total | number_format(2, '€', '.') }}</span></p>
+                        <p class="order__price-delivery"><span>Livraison :</span> <span>{{ carrier.price | number_format(2, '€', '.') }}</span></p>
+                        <p class="order__price-total"><span>Total :</span> <span>{{ (total + carrier.price) | number_format(2, '€', '.') }}</span></p>
+                        <a href="" class="button">Payer | {{ (total + carrier.price) | number_format(2, '€', '.') }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

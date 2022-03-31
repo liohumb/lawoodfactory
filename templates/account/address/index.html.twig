@@ -7,7 +7,7 @@
         {% if user.addresses | length == 0 %}
             <div class="address__container-empty">
                 <h1>Vous n'avez pas encore renseigné d'adresse...</h1>
-                <a href="{{ path('account_address_add') }}" class="button">Ajouter une adresse</a>
+                <a href="{{ path('account_address_add', {id: app.user.id}) }}" class="button">Ajouter une adresse</a>
             </div>
         {% else %}
             <div class="address__container">

@@ -34,16 +34,29 @@
                         {% endfor %}
                     </div>
                     <div class="cart__recap">
-                        <h3 class="cart__recap-title">Pour continuer valider votre panier merci de vous connecter</h3>
-                        <div class="cart__recap-buttons">
-                            <a href="{{ path('login') }}" class="cart__recap-button">connexion</a>
-                            <span>ou</span>
-                            <a href="{{ path('register') }}" class="cart__recap-button">inscription</a>
-                        </div>
-                        <span class="cart__recap-split"></span>
-                        <h3 class="cart__recap-number">{{ cart | length }} produit(s) dans le panier</h3>
-                        <p class="cart__recap-subtotal"><span>Sous-total :</span> <span>{{ total | number_format(2, '€', '.') }}</span></p>
-                        <a href="{{ path('product') }}" class="button">Continuer vos achat</a>
+                        {% set formHtml %}
+                        {{ form_start(form, {action : path('order', {id: app.user.id})}) }}
+                            <h3 class="cart__recap-title">Choisissez votre adresse de livraison</h3>
+                            <a href="{{ path('account_address_add', {id: app.user.id}) }}" class="cart__recap-subtitle">
+                                <i class='bx bx-plus'></i>
+                                ajouter une adresse
+                            </a>
+                            {{ form_widget(form.addresses) }}
+                            <h3 class="cart__recap-title">Choisissez votre transporteur</h3>
+                            {{ form_widget(form.carriers) }}
+                            <span class="cart__recap-split"></span>
+                            <h3 class="cart__recap-number">{{ cart | length }} produit(s) dans le panier</h3>
+                            <p class="cart__recap-subtotal"><span>Sous-total :</span> <span>{{ total | number_format(2, '€', '.') }}</span></p>
+                            <a href="{{ path('product') }}" class="button">Continuer vos achat</a>
+                            <button class="button button__bg">Valider votre panier</button>
+                            {{ form_errors(form) }}
+                        {{ form_end(form) }}
+                        {% endset %}
+                        {{ formHtml | replace({
+                            '[span]' : '<span>',
+                            '[span/]' : '<span/>',
+                            '[br]' : '<br/>'
+                        }) | raw }}
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Account;
 
+use App\Classes\Cart;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\UserRepository;
@@ -42,7 +43,7 @@ class AddressController extends AbstractController
     /**
      * @Route("/votre-compte/{id}/adresses/ajouter", name="account_address_add")
      */
-    public function add($id, UserRepository $userRepository, Request $request): Response
+    public function add($id, UserRepository $userRepository, Request $request, Cart $cart): Response
     {
         $user = $userRepository->findOneBy(['id' => $id]);
 
@@ -61,7 +62,11 @@ class AddressController extends AbstractController
             $this->entityManager->persist($address);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('account_address', ['id' => $id]);
+            if ($cart->get()) {
+                return $this->redirectToRoute('cart_user', ['id' => $id]);
+            } else {
+                return $this->redirectToRoute('account_address', ['id' => $id]);
+            }
         }
 
         return $this->render('account/address/add.html.twig', [
