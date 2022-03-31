@@ -7,7 +7,7 @@
         <h2 class="account__title">Votre administration</h2>
 
         <div class="account__container-mobile grid">
-            <a href="">
+            <a href="{{ path('admin_order') }}">
                 <div class="account__box" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
                         <span class="button button__white">GÉRER LES COMMANDES</span>
@@ -61,7 +61,7 @@
         <div class="account__admin-container grid">
             <div class="account__box account__admin-order" style="background: url({{ asset('assets/img/admin/order.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
-                    <a href="#" class="button button__white">GÉRER LES COMMANDES</a>
+                    <a href="{{ path('admin_order') }}" class="button button__white">GÉRER LES COMMANDES</a>
                 </div>
             </div>
 

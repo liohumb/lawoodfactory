@@ -984,64 +984,77 @@ margin: .4rem 0 0 0;
 
 .account__comment-container {
   max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin: 0 auto;
+  padding: 0 .5rem;
 }
 
-.responsive-table li {
-  border-radius: 3px;
-  padding: 25px 30px;
+.account__table li {
+  border-radius: .5rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  align-items: center;
+  margin: 0 0 1rem 0;
 }
-.responsive-table .table-header {
-  background-color: #95a5a6;
-  font-size: 14px;
+
+.account__table .account__table-header {
+  background-color: var(--first-color-alt);
+  font-size: var(--normal-font-size);
+  color: var(--container-color);
+  font-weight: var(--font-bold);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
-.responsive-table .table-row {
-  background-color: #fff;
+
+.account__table .account__table-row {
+  background-color: var(--container-color);
   box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
 }
-.responsive-table .col-1 {
+
+.account__table .account__table-active {
   flex-basis: 10%;
 }
-.responsive-table .col-2 {
+
+.account__table .account__table-comment {
   flex-basis: 40%;
 }
-.responsive-table .col-3 {
+
+.account__table .account__table-product {
   flex-basis: 25%;
 }
-.responsive-table .col-4 {
+
+.account__table .account__table-user {
   flex-basis: 20%;
 }
-.responsive-table .col-5 {
+
+.account__table .account__table-trash {
   flex-basis: 5%;
 }
+
+.account__table-active a i {
+  font-size: 2rem;
+}
+
 @media all and (max-width: 767px) {
-  .responsive-table .table-header {
+  .account__table .account__table-header {
     display: none;
   }
-  .responsive-table li {
+  .account__table li {
     display: block;
   }
-  .responsive-table .col {
+  .account__table .account__table-col {
     flex-basis: 100%;
   }
-  .responsive-table .col {
+  .account__table .account__table-col {
     display: flex;
     padding: 10px 0;
   }
-  .responsive-table .col:before {
-    color: #6c7a89;
-    padding-right: 10px;
+  .account__table .account__table-col:before {
+    color: var(--text-color-light);
     content: attr(data-label);
     flex-basis: 50%;
     text-align: right;
+    padding: 0 .75rem 0 0;
   }
 }
 
