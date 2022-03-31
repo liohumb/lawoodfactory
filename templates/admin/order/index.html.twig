@@ -1,6 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}Commandes • L&A WoodFactory{% endblock %}
 
 {% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Les commande</h2>
+        <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
+        <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir voir & gérer les commandes.</h3>
+
+        <div class="account__comment-container">
+            <ul class="account__table">
+                <li class="account__table-header">
+                    <div class="account__table-col account__table-orderId">Commandes</div>
+                    <div class="account__table-col account__table-orderDate">Date</div>
+                    <div class="account__table-col account__table-orderUser">Clients</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Nombre de produits</div>
+                    <div class="account__table-col account__table-orderPrice">Total</div>
+                </li>
+                {% for order in orders %}
+                    <li class="account__table-row">
+                        <div class="account__table-col account__table-orderId" data-label="Commande">{{ order.id }}</div>
+                        <div class="account__table-col account__table-orderDate" data-label="Date">{{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}</div>
+                        <div class="account__table-col account__table-orderUser" data-label="Clients">{{ order.user.firstname }} {{ order.user.lastname }}</div>
+                        <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">{{ order.orderDetails | length }}</div>
+                        <div class="account__table-col account__table-orderPrice" data-label="Total"></div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 {% endblock %}

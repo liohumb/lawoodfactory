@@ -2,6 +2,7 @@
 
 {% block title %}Paiement de votre commande • L&A WoodFactory{% endblock %}
 
+
 {% block content %}
     <section class="order section section__bg">
         <h1 class="order__title">Paiement de votre commande</h1>
@@ -56,10 +57,39 @@
                         <p class="order__price-subtotal"><span>Sous-total :</span> <span>{{ total | number_format(2, '€', '.') }}</span></p>
                         <p class="order__price-delivery"><span>Livraison :</span> <span>{{ carrier.price | number_format(2, '€', '.') }}</span></p>
                         <p class="order__price-total"><span>Total :</span> <span>{{ (total + carrier.price) | number_format(2, '€', '.') }}</span></p>
-                        <a href="" class="button">Payer | {{ (total + carrier.price) | number_format(2, '€', '.') }}</a>
+                        <a class="button" id="checkout-button">Payer | {{ (total + carrier.price) | number_format(2, '€', '.') }}</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 {% endblock %}
+
+{% block JavaScript %}
+    <script type="text/javascript">
+        var stripe = Stripe('pk_test_51KjJP6ILc6D6W35zNVZTyb1x3URQkRu7ebOyNPbGtxYEgcV6CSuHSlLO1PyVD91Rvo3OFahVqQ112P2X3QRcBz7z00c9uFCb5i');
+        var checkoutButton = document.getElementById("checkout-button");
+
+        checkoutButton.addEventListener("click", function () {
+            fetch("/votre-commande/create-session", {
+                method: "POST"
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({sessionId: session.id});
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error:", error);
+                });
+        });
+    </script>
+{% endblock %}
+
+

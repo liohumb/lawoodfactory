@@ -1011,23 +1011,23 @@ margin: .4rem 0 0 0;
   box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
 }
 
-.account__table .account__table-active {
+.account__table .account__table-commentActive {
   flex-basis: 10%;
 }
 
-.account__table .account__table-comment {
+.account__table .account__table-commentComment {
   flex-basis: 40%;
 }
 
-.account__table .account__table-product {
+.account__table .account__table-commentProduct {
   flex-basis: 25%;
 }
 
-.account__table .account__table-user {
+.account__table .account__table-commentUser {
   flex-basis: 20%;
 }
 
-.account__table .account__table-trash {
+.account__table .account__table-commentTrash {
   flex-basis: 5%;
 }
 

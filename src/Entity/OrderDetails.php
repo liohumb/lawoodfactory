@@ -43,6 +43,7 @@ class OrderDetails
      */
     private $total;
 
+
     public function getId(): ?int
     {
         return $this->id;

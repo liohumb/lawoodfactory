@@ -27,6 +27,10 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/votre-commande/{id}", name="order", methods={"POST"})
+     * @param $id
+     * @param Cart $cart
+     * @param Request $request
+     * @return Response
      */
     public function index($id, Cart $cart, Request $request): Response
     {
