@@ -71,14 +71,18 @@
         var checkoutButton = document.getElementById("checkout-button");
 
         checkoutButton.addEventListener("click", function () {
-            fetch("/votre-commande/create-session", {
+            fetch("/votre-commande/{{ app.user.id }}/create-session/{{ reference }}", {
                 method: "POST"
             })
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (session) {
-                    return stripe.redirectToCheckout({sessionId: session.id});
+                    if (session.error === 'order') {
+                        window.location.replace('{{ path('cart') }}');
+                    } else {
+                        return stripe.redirectToCheckout({sessionId: session.id});
+                    }
                 })
                 .then(function (result) {
                     if (result.error) {

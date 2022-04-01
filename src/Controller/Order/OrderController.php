@@ -62,7 +62,11 @@ class OrderController extends AbstractController
             $deliveryContent .= $delivery->getPostcode() . ' ' . $delivery->getCity() . '<br>';
             $deliveryContent .= $delivery->getPhone();
 
+            $date = new \DateTime();
+            $reference = $date->format('dmY') . '-' . uniqid();
+
             $order = new Order();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCarrierName($carriers->getName());
             $order->setCarrierPrice($carriers->getPrice());
@@ -87,7 +91,8 @@ class OrderController extends AbstractController
             return $this->render('order/index.html.twig', [
                 'cart' => $cart->cart(),
                 'carrier' => $carriers,
-                'delivery' => $delivery
+                'delivery' => $delivery,
+                'reference' => $order->getReference()
             ]);
         }
 
