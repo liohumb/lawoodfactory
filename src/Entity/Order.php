@@ -63,6 +63,11 @@ class Order
      */
     private $reference;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stripe;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -176,6 +181,18 @@ class Order
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStripe(): ?string
+    {
+        return $this->stripe;
+    }
+
+    public function setStripe(?string $stripe): self
+    {
+        $this->stripe = $stripe;
 
         return $this;
     }
