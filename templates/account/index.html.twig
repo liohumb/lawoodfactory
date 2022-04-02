@@ -7,7 +7,7 @@
         <h2 class="account__title">Votre compte</h2>
 
         <div class="account__container-mobile grid">
-            <a href="">
+            <a href="{{ path('account_order', {id: app.user.id}) }}">
                 <div class="account__box" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
                     <div class="account__link-mobile">
                         <span class="button button__white">VOIR LES COMMANDES</span>
@@ -68,7 +68,7 @@
 
             <div class="account__box account__box-order" style="background: url({{ asset('assets/img/account/order.jpg') }}) no-repeat center center; background-size: cover;">
                 <div class="account__link">
-                    <a href="#" class="button button__white">VOIR LES COMMANDES</a>
+                    <a href="{{ path('account_order', {id: app.user.id}) }}" class="button button__white">VOIR LES COMMANDES</a>
                 </div>
             </div>
 

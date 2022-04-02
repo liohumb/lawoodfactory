@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}Vos commande • L&A WoodFactory{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Vos commande</h2>
+        <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
+        <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir voir & gérer les commandes.</h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/Account/OrderController.php'|file_link(0) }}">src/Controller/Account/OrderController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/account/order/index.html.twig'|file_link(0) }}">templates/account/order/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="account__comment-container">
+            <ul class="account__table">
+                <li class="account__table-header">
+                    <div class="account__table-col account__table-orderReference">Commandes</div>
+                    <div class="account__table-col account__table-orderDate">Date</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
+                    <div class="account__table-col account__table-orderPrice">Total</div>
+                    <div class="account__table-col account__table-orderButton"> </div>
+                </li>
+                {% for order in orders %}
+                    <li class="account__table-row">
+                        <div class="account__table-col account__table-orderReference" data-label="Commande">
+                            <span>
+                            {{ order.reference }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderDate" data-label="Date">
+                            <span>
+                            {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            <span>
+                                {{ order.orderDetails |length }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            <span>
+                                {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderButton" data-label=" ">
+                            <a href="{{ path('account_order_show', {id: app.user.id, reference: order.reference}) }}">
+                                <i class='bx bx-search-alt'></i>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 {% endblock %}

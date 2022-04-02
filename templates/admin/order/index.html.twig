@@ -11,19 +11,45 @@
         <div class="account__comment-container">
             <ul class="account__table">
                 <li class="account__table-header">
-                    <div class="account__table-col account__table-orderId">Commandes</div>
+                    <div class="account__table-col account__table-orderReference">Commandes</div>
                     <div class="account__table-col account__table-orderDate">Date</div>
                     <div class="account__table-col account__table-orderUser">Clients</div>
-                    <div class="account__table-col account__table-orderNumberProduct">Nombre de produits</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
                     <div class="account__table-col account__table-orderPrice">Total</div>
+                    <div class="account__table-col account__table-orderButton"> </div>
                 </li>
                 {% for order in orders %}
                     <li class="account__table-row">
-                        <div class="account__table-col account__table-orderId" data-label="Commande">{{ order.id }}</div>
-                        <div class="account__table-col account__table-orderDate" data-label="Date">{{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}</div>
-                        <div class="account__table-col account__table-orderUser" data-label="Clients">{{ order.user.firstname }} {{ order.user.lastname }}</div>
-                        <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">{{ order.orderDetails | length }}</div>
-                        <div class="account__table-col account__table-orderPrice" data-label="Total"></div>
+                        <div class="account__table-col account__table-orderReference" data-label="Commande">
+                            <span>
+                            {{ order.reference }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderDate" data-label="Date">
+                            <span>
+                            {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderUser" data-label="Clients">
+                            <span>
+                                {{ order.user.firstname }} {{ order.user.lastname }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            <span>
+                                {{ order.orderDetails |length }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            <span>
+                                {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                            </span>
+                        </div>
+                        <div class="account__table-col account__table-orderButton" data-label=" ">
+                            <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
+                                <i class='bx bx-search-alt'></i>
+                            </a>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
