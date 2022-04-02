@@ -30,6 +30,9 @@ class PasswordController extends AbstractController
 
     /**
      * @Route("/votre-compte/modifier-votre-mot-de-passe", name="account_password")
+     * @param Request $request
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
      */
     public function index(Request $request, UserPasswordHasherInterface $hasher): Response
     {

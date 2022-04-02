@@ -12,6 +12,9 @@ class LikeController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/produits-aimes", name="account_like")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index($id, UserRepository $userRepository): Response
     {

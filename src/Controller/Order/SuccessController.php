@@ -24,6 +24,10 @@ class SuccessController extends AbstractController
 
     /**
      * @Route("/votre-commande/{id}/merci/{stripe}", name="order_success")
+     * @param $id
+     * @param $stripe
+     * @param Cart $cart
+     * @return Response
      */
     public function index($id, $stripe, Cart $cart): Response
     {

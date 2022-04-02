@@ -26,6 +26,9 @@ class AddressController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/adresses", name="account_address")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index($id, UserRepository $userRepository): Response
     {
@@ -42,6 +45,11 @@ class AddressController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/adresses/ajouter", name="account_address_add")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @param Request $request
+     * @param Cart $cart
+     * @return Response
      */
     public function add($id, UserRepository $userRepository, Request $request, Cart $cart): Response
     {
@@ -76,6 +84,11 @@ class AddressController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/adresses/modifier/{addressId}", name="account_address_edit")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @param $addressId
+     * @param Request $request
+     * @return Response
      */
     public function edit($id, UserRepository $userRepository, $addressId, Request $request): Response
     {
@@ -108,6 +121,10 @@ class AddressController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/adresses/suprimer/{addressId}", name="account_address_delete")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @param $addressId
+     * @return Response
      */
     public function delete($id, UserRepository $userRepository, $addressId): Response
     {

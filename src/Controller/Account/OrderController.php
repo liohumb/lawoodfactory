@@ -24,6 +24,9 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/votre-compte/{id}/commandes", name="account_order")
+     * @param $id
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index($id, UserRepository $userRepository): Response
     {

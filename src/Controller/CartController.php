@@ -24,6 +24,8 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier", name="cart")
+     * @param Cart $cart
+     * @return Response
      */
     public function index(Cart $cart): Response
     {
@@ -38,6 +40,9 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/ajout/{id}", name="cart_add")
+     * @param $id
+     * @param Cart $cart
+     * @return Response
      */
     public function add($id, Cart $cart): Response
     {
@@ -48,6 +53,9 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/supprimer-quantitee/{id}", name="cart_decrease")
+     * @param $id
+     * @param Cart $cart
+     * @return Response
      */
     public function decrease($id, Cart $cart): Response
     {
@@ -58,6 +66,9 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/supprimer-produit/{id}", name="cart_delete")
+     * @param $id
+     * @param Cart $cart
+     * @return Response
      */
     public function delete($id, Cart $cart): Response
     {
@@ -68,6 +79,8 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/supprimer", name="cart_remove")
+     * @param Cart $cart
+     * @return Response
      */
     public function remove(Cart $cart): Response
     {
@@ -78,6 +91,9 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/{id}", name="cart_user")
+     * @param $id
+     * @param Cart $cart
+     * @return Response
      */
     public function user($id, Cart $cart): Response
     {

@@ -23,6 +23,8 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/administration/commandes", name="admin_order")
+     * @param OrderRepository $orderRepository
+     * @return Response
      */
     public function index(OrderRepository $orderRepository): Response
     {
@@ -33,6 +35,8 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/administration/commandes/{reference}", name="admin_order_show")
+     * @param $reference
+     * @return Response
      */
     public function show($reference): Response
     {

@@ -23,6 +23,9 @@ class CancelController extends AbstractController
 
     /**
      * @Route("/votre-commande/{id}/erreur/{stripe}", name="order_cancel")
+     * @param $id
+     * @param $stripe
+     * @return Response
      */
     public function index($id, $stripe): Response
     {
