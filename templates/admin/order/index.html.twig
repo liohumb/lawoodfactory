@@ -4,11 +4,12 @@
 
 {% block content %}
     <section class="account section" id="account">
-        <h2 class="account__title">Les commande</h2>
+        <h2 class="account__title">Les commandes</h2>
         <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
         <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir voir & gérer les commandes.</h3>
 
-        <div class="account__comment-container">
+        <div class="account__order-container" id="account__order-paid">
+            <h3 class="account__order-title">Les dernières commandes</h3>
             <ul class="account__table">
                 <li class="account__table-header">
                     <div class="account__table-col account__table-orderReference">Commandes</div>
@@ -18,40 +19,208 @@
                     <div class="account__table-col account__table-orderPrice">Total</div>
                     <div class="account__table-col account__table-orderButton"> </div>
                 </li>
-                {% for order in orders %}
-                    <li class="account__table-row">
-                        <div class="account__table-col account__table-orderReference" data-label="Commande">
+                {% if orderPaid | length == 0 %}
+                    <h1>Pas de nouvelle commande</h1>
+                {% else %}
+                    {% for order in orderPaid %}
+                        <li class="account__table-row">
+                            <div class="account__table-col account__table-orderReference" data-label="Commande">
                             <span>
                             {{ order.reference }}
                             </span>
-                        </div>
-                        <div class="account__table-col account__table-orderDate" data-label="Date">
+                            </div>
+                            <div class="account__table-col account__table-orderDate" data-label="Date">
                             <span>
                             {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
                             </span>
-                        </div>
-                        <div class="account__table-col account__table-orderUser" data-label="Clients">
+                            </div>
+                            <div class="account__table-col account__table-orderUser" data-label="Clients">
                             <span>
                                 {{ order.user.firstname }} {{ order.user.lastname }}
                             </span>
-                        </div>
-                        <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            </div>
+                            <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
                             <span>
                                 {{ order.orderDetails |length }}
                             </span>
-                        </div>
-                        <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            </div>
+                            <div class="account__table-col account__table-orderPrice" data-label="Total">
                             <span>
                                 {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
                             </span>
-                        </div>
-                        <div class="account__table-col account__table-orderButton" data-label=" ">
-                            <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
-                                <i class='bx bx-search-alt'></i>
-                            </a>
-                        </div>
-                    </li>
-                {% endfor %}
+                            </div>
+                            <div class="account__table-col account__table-orderButton" data-label=" ">
+                                <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
+                                    <i class='bx bx-search-alt'></i>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {{ knp_pagination_render(orderPaid) }}
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="account__order-container" id="account__order-build">
+            <h3 class="account__order-title">Les commandes en cours de fabrication</h3>
+            <ul class="account__table">
+                <li class="account__table-header">
+                    <div class="account__table-col account__table-orderReference">Commandes</div>
+                    <div class="account__table-col account__table-orderDate">Date</div>
+                    <div class="account__table-col account__table-orderUser">Clients</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
+                    <div class="account__table-col account__table-orderPrice">Total</div>
+                    <div class="account__table-col account__table-orderButton"> </div>
+                </li>
+                {% if orderBuild | length == 0 %}
+                    <h1>Pas de commande en cours de fabrication</h1>
+                {% else %}
+                    {% for order in orderBuild %}
+                        <li class="account__table-row">
+                            <div class="account__table-col account__table-orderReference" data-label="Commande">
+                            <span>
+                            {{ order.reference }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderDate" data-label="Date">
+                            <span>
+                            {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderUser" data-label="Clients">
+                            <span>
+                                {{ order.user.firstname }} {{ order.user.lastname }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            <span>
+                                {{ order.orderDetails |length }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            <span>
+                                {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderButton" data-label=" ">
+                                <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
+                                    <i class='bx bx-search-alt'></i>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {{ knp_pagination_render(orderBuild) }}
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="account__order-container" id="account__order-delivery">
+            <h3 class="account__order-title">
+                <a href="{{ path('admin_order_delivery') }}">Les commandes en cours de livraison</a>
+            </h3>
+            <ul class="account__table">
+                <li class="account__table-header">
+                    <div class="account__table-col account__table-orderReference">Commandes</div>
+                    <div class="account__table-col account__table-orderDate">Date</div>
+                    <div class="account__table-col account__table-orderUser">Clients</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
+                    <div class="account__table-col account__table-orderPrice">Total</div>
+                    <div class="account__table-col account__table-orderButton"> </div>
+                </li>
+                {% if orderDelivery | length == 0 %}
+                    <h1>Pas de commande en attente de livraison</h1>
+                {% else %}
+                    {% for order in orderDelivery %}
+                        <li class="account__table-row">
+                            <div class="account__table-col account__table-orderReference" data-label="Commande">
+                            <span>
+                            {{ order.reference }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderDate" data-label="Date">
+                            <span>
+                            {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderUser" data-label="Clients">
+                            <span>
+                                {{ order.user.firstname }} {{ order.user.lastname }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            <span>
+                                {{ order.orderDetails |length }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            <span>
+                                {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderButton" data-label=" ">
+                                <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
+                                    <i class='bx bx-search-alt'></i>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {{ knp_pagination_render(orderDelivery) }}
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="account__order-container" id="account__order-complete">
+            <h3 class="account__order-title">
+                <a href="{{ path('admin_order_complete') }}">Les commandes terminées</a>
+            </h3>
+            <ul class="account__table">
+                <li class="account__table-header">
+                    <div class="account__table-col account__table-orderReference">Commandes</div>
+                    <div class="account__table-col account__table-orderDate">Date</div>
+                    <div class="account__table-col account__table-orderUser">Clients</div>
+                    <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
+                    <div class="account__table-col account__table-orderPrice">Total</div>
+                    <div class="account__table-col account__table-orderButton"> </div>
+                </li>
+                {% if orderComplete | length == 0 %}
+                    <h1>Pas de commande terminée</h1>
+                {% else %}
+                    {% for order in orderComplete %}
+                        <li class="account__table-row">
+                            <div class="account__table-col account__table-orderReference" data-label="Commande">
+                            <span>
+                            {{ order.reference }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderDate" data-label="Date">
+                            <span>
+                            {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderUser" data-label="Clients">
+                            <span>
+                                {{ order.user.firstname }} {{ order.user.lastname }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                            <span>
+                                {{ order.orderDetails |length }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderPrice" data-label="Total">
+                            <span>
+                                {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                            </span>
+                            </div>
+                            <div class="account__table-col account__table-orderButton" data-label=" ">
+                                <a href="{{ path('admin_order_show', {reference: order.reference}) }}">
+                                    <i class='bx bx-search-alt'></i>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {{ knp_pagination_render(orderComplete) }}
+                {% endif %}
             </ul>
         </div>
     </section>

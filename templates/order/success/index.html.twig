@@ -15,7 +15,7 @@
                     <h3 class="template__box-other">
                         Une confirmation vient de vous être envoyée à l'adresse <i>{{ order.user.email }}</i>.
                     </h3>
-                    <a href="" class="button button__alt">Suivre votre commande</a>
+                    <a href="{{ path('account_order_show', {id: app.user.id, reference: order.reference}) }}" class="button button__alt">Suivre votre commande</a>
                 </div>
             </div>
 

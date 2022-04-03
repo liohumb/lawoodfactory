@@ -879,10 +879,13 @@ margin: .4rem 0 0 0;
   margin: 6rem 0;
 }
 
+.template__order {
+  padding: 2rem 1rem ;
+}
+
 .template__order-date,
 .template__order-reference,
-.template__order-carrier,
-.template__order-state {
+.template__order-carrier {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -894,7 +897,8 @@ margin: .4rem 0 0 0;
 .template__order-carrier h3,
 .template__order-productsContainer h3,
 .template__order-state h3 {
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-light);
   font-style: italic;
   color: var(--text-color-light);
 }
@@ -907,6 +911,10 @@ margin: .4rem 0 0 0;
   font-weight: var(--font-medium);
   color: var(--first-color-alt);
   letter-spacing: .05rem;
+}
+
+.template__order-reference span {
+  text-align: end;
 }
 
 .template__order-products {
@@ -945,6 +953,34 @@ margin: .4rem 0 0 0;
 
 .template__order-product h3 span {
   color: var(--text-color-light);
+}
+
+.template__order-state {
+  margin: 2rem 0 0 0;
+}
+
+.template__order-state span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 0 0;
+}
+
+.template__order-state span i {
+  font-size: 1.5rem;
+  margin: 0 .5rem 0 0;
+}
+
+.template__order-state form {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.template__order-state form button {
+  padding: .5rem 1rem;
 }
 
 @keyframes spin {
@@ -1050,10 +1086,31 @@ margin: .4rem 0 0 0;
   margin: 20% auto;
 }
 
-.account__comment-container {
+.account__comment-container,
+.account__order-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 .5rem;
+}
+
+.account__order-container {
+  margin: 0 auto 6rem auto;
+}
+
+.account__order-title {
+  font-size: var(--h2-font-size);
+  color: var(--first-color-alt);
+  font-style: italic;
+  text-align: center;
+  margin: 0 0 2.5rem 0;
+}
+
+.account__order-title a {
+  color: var(--first-color-alt);
+}
+
+.account__order-title a:hover {
+  color: var(--first-color);
 }
 
 .account__table li {
@@ -1064,6 +1121,13 @@ margin: .4rem 0 0 0;
   border-radius: .5rem;
   padding: 1rem 1.5rem;
   margin: 0 0 1rem 0;
+}
+
+.account__table h1 {
+  font-size: var(--h1-font-size);
+  color: var(--first-color-lighten);
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .account__table .account__table-header {
@@ -1151,6 +1215,23 @@ margin: .4rem 0 0 0;
 
 .account__table-active a i {
   font-size: 2rem;
+}
+
+.account__table .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account__table .pagination span {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-bold);
+  color: var(--text-color-light);
+  margin: 0 2rem;
+}
+
+.account__table .pagination span:hover {
+  color: var(--first-color);
 }
 
 @media all and (max-width: 767px) {

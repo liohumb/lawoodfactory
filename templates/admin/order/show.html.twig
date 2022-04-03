@@ -10,6 +10,9 @@
                     <h1 class="template__box-title">Gérer une commande</h1>
                     <h3 class="template__box-subtitle">{{ app.user.firstname }}, retrouvez les détails de la commande n°{{ order.reference }}</h3>
                     <h3 class="template__box-other">Vous avez la possibilité d'obtenir le details pour la préparation de commande et de changer son statut.</h3>
+                    {% if notification %}
+                        <h3 class="template__box-other">{{ notification }}</h3>
+                    {% endif %}
                     <a href="{{ path('admin_order') }}" class="button button__alt">Retour aux commandes</a>
                 </div>
             </div>
@@ -38,8 +41,16 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="template__order-statut">
+                    <div class="template__order-state">
                         <h3>Statut de la commande :</h3>
+                        {{ form_start(form) }}
+                        <div class="form__inputs">
+                            <div class="form__content">
+                                {{ form_widget(form.state) }}
+                            </div>
+                        </div>
+                        <button class="button">Valider</button>
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>
