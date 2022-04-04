@@ -128,23 +128,33 @@
             <div class="contact__subscribe">
                 <h2 class="section__title">CONTACTEZ NOUS</h2>
                 <p class="contact__description">Pour toutes questions ou autres, n'hésitez pas et contactez-nous dès à présent !</p>
-                <form action="" class="contact__form">
-                    <div class="form__inputs">
-                        <div class="form__content">
-                            <input type="text" id="contact_form_name" placeholder=" " class="form__input">
-                            <label for="contact_form_name" class="form__label">Votre nom</label>
-                        </div>
-                        <div class="form__content">
-                            <input type="email" id="contact_form_email" placeholder=" " class="form__input">
-                            <label for="contact_form_email" class="form__label">votre@email.com</label>
-                        </div>
-                        <div class="form__content form__area">
-                            <textarea  id="contact_form_content" placeholder=" " class="form__input"></textarea>
-                            <label for="contact_form_content" class="form__label">Votre message</label>
-                        </div>
+                {% if notification %}
+                    <p class="contact__description">{{ notification }}</p>
+                {% endif %}
+
+                {{ form_start(form) }}
+                <div class="form__inputs">
+                    <div class="form__content">
+                        {{ form_widget(form.name) }}
+                        {{ form_label(form.name) }}
                     </div>
-                    <button class="button">Envoyer</button>
-                </form>
+                    {{ form_errors(form.name) }}
+                    <div class="form__content">
+                        {{ form_widget(form.email) }}
+                        {{ form_label(form.email) }}
+                    </div>
+                    {{ form_errors(form.email) }}
+                    <div class="form__content form__area">
+                        {{ form_widget(form.content) }}
+                        {{ form_label(form.content) }}
+                    </div>
+                    {{ form_errors(form.content) }}
+                </div>
+
+                <button class="button">
+                    Envoyer
+                </button>
+                {{ form_end(form) }}
             </div>
         </div>
     </section>

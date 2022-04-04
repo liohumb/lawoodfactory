@@ -728,6 +728,11 @@ margin: .4rem 0 0 0;
   text-align: center;
 }
 
+.contact__subscribe form {
+  width: 90%;
+  margin: 0 auto;
+}
+
 /*===== TEMPLATE =====*/
 .template {
   background-color: var(--container-color);
@@ -2777,6 +2782,9 @@ margin: .4rem 0 0 0;
   }
   .new__container {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .contact__subscribe form {
+    width: 66%;
   }
   .template__container {
     height: 95vh;
