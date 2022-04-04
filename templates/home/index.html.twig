@@ -42,38 +42,34 @@
         <h2 class="section__title">LES PRODUITS DU MOMENT</h2>
         <a href="#" class="section__subtitle">Voir tous les produits</a>
 
-        <div class="featured__container grid">
-            <div class="featured__product">
-                <div class="featured__box">
-                    <img src="{{ asset('assets/img/feature1.png') }}" alt="" class="featured__img">
-                </div>
-
-                <div class="featured__data">
-                    <h3 class="featured__name">Son premier cheval</h3>
-                    <span class="featured__price">59€99</span>
-                </div>
+        <div class="products__mobile-container container swiper">
+            <div class="swiper-wrapper">
+                {% for product in productBest %}
+                    <article class="products__mobile-card swiper-slide" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <a href="{{ path('product_show', {slug: product.slug}) }}" class="products__data">
+                            <h1 class="products__title">{{ product.title }}</h1>
+                            <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                            <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                        </a>
+                    </article>
+                {% endfor %}
             </div>
 
-            <div class="featured__product">
-                <div class="featured__box">
-                    <img src="{{ asset('assets/img/feature2.png') }}" alt="" class="featured__img">
-                </div>
-
-                <div class="featured__data">
-                    <h3 class="featured__name">La table d'appoint</h3>
-                    <span class="featured__price">99€00</span>
-                </div>
-            </div>
-
-            <div class="featured__product">
-                <div class="featured__box">
-                    <img src="{{ asset('assets/img/feature3.png') }}" alt="" class="featured__img">
-                </div>
-
-                <div class="featured__data">
-                    <h3 class="featured__name">Le tabouret de bar</h3>
-                    <span class="featured__price">65€50</span>
-                </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="products__container container">
+            <div class="products__content grid">
+                {% for product in productBest %}
+                    <article class="products__card" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <a href="{{ path('product_show', {slug: product.slug}) }}">
+                            <div class="products__data">
+                                <h1 class="products__title">{{ product.title }}</h1>
+                                <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                                <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -94,53 +90,34 @@
         <h2 class="section__title">NOUVEAUX PRODUITS</h2>
         <a href="#" class="section__subtitle">Voir tous les produits</a>
 
-        <div class="new__container grid">
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new1.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
+        <div class="products__mobile-container container swiper">
+            <div class="swiper-wrapper">
+                {% for product in productNew %}
+                    <article class="products__mobile-card swiper-slide" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <a href="{{ path('product_show', {slug: product.slug}) }}" class="products__data">
+                            <h1 class="products__title">{{ product.title }}</h1>
+                            <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                            <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                        </a>
+                    </article>
+                {% endfor %}
             </div>
 
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new2.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
-            </div>
-
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new3.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
-            </div>
-
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new4.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
-            </div>
-
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new5.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
-            </div>
-
-            <div class="new__box">
-                <img src="{{ asset('assets/img/new6.png') }}" alt="" class="new__img">
-
-                <div class="new__link">
-                    <a href="#" class="button button__white">VOIR LE PRODUIT</a>
-                </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="products__container container">
+            <div class="products__content-new grid">
+                {% for product in productNew %}
+                    <article class="products__card" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                        <a href="{{ path('product_show', {slug: product.slug}) }}">
+                            <div class="products__data">
+                                <h1 class="products__title">{{ product.title }}</h1>
+                                <h3 class="products__subtitle">{{ product.subtitle }}</h3>
+                                <h3 class="products__price">{{ product.price | number_format(2, '€', '.') }}</h3>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
             </div>
         </div>
     </section>

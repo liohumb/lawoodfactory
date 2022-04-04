@@ -39,6 +39,21 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/administration/produit/favoris/{id}", name="admin_product_best")
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function best(Product $product): RedirectResponse
+    {
+        $product->setIsBest(!$product->getIsBest());
+
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('admin_product');
+    }
+
+    /**
      * @Route("/administration/produit/ajouter", name="admin_product_add")
      * @param Request $request
      * @return Response

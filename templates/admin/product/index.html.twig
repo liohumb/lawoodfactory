@@ -36,10 +36,15 @@
                 </div>
             </div>
             {% for product in products %}
-                <div class="account__box" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                <div class="account__box" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;" id="{{ product.id }}">
                     <div class="account__link account__link-product">
                         <span class="account__link-title">{{ product.title }}</span>
                         <a href="{{ path('admin_product_edit', {id: product.id}) }}" class="button button__white">MODIFIER</a>
+                        {% if product.isBest == 0 %}
+                            <a href="{{ path('admin_product_best', {id: product.id}) }}#{{ product.id }}" class="account__link-best">Mettre en avant</a>
+                        {% else %}
+                            <a href="{{ path('admin_product_best', {id: product.id}) }}#{{ product.id }}" class="account__link-best">Ne plus mettre en avant</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

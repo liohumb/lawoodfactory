@@ -55,6 +55,13 @@
                     <h3 class="template__box-subtitle">Éditer le formulaire pour modifier un produit</h3>
                     <a href="{{ path('admin_product_delete', {id: product.id}) }}" class="button__delete">Supprimer</a>
                     <h3 class="template__box-subtitle">Vous avez aussi la possibilité de supprimer ce produit. Attention! Cette action est irreversible!!</h3>
+
+                    {% if product.isBest == 0 %}
+                        <a href="{{ path('admin_product_best', {id: product.id}) }}" class="account__link-best">Mettre en avant</a>
+                    {% else %}
+                        <a href="{{ path('admin_product_best', {id: product.id}) }}" class="account__link-best">Ne plus mettre en avant</a>
+                    {% endif %}
+
                     <span class="template__box-detail">
                         <a href="{{ path('admin_product') }}">retour</a>
                     </span>
