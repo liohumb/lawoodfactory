@@ -1106,7 +1106,8 @@ margin: .4rem 0 0 0;
 }
 
 .account__comment-container,
-.account__order-container {
+.account__order-container,
+.account__condition-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 .5rem;
@@ -1114,6 +1115,36 @@ margin: .4rem 0 0 0;
 
 .account__order-container {
   margin: 0 auto 6rem auto;
+}
+
+.account__condition-container {
+  height: 100vh;
+}
+
+.account__condition {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account__condition-box {
+  width: 75%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.account__condition-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.account__condition-button {
+  margin: 0 auto 2rem auto;
 }
 
 .account__order-title {
@@ -2575,6 +2606,12 @@ margin: .4rem 0 0 0;
   color: var(--first-color-alt);
   font-weight: var(--font-bold);
   margin: .75rem 0 2rem 0;
+}
+
+/*===== CONDITION =====*/
+.condition__container {
+  width: 75%;
+  margin: 0 auto;
 }
 
 /*===== FOOTER =====*/

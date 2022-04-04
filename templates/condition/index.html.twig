@@ -1,20 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConditionController!{% endblock %}
+{% block title %}Conditions d'utilisation & de vente{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <section class="condition section">
+        <h1 class="section__title">Les conditions d'utilisation & de ventes</h1>
+        <h3 class="section__subtitle">Retrouvez nos conditions d'utilisation et de vente, des informations sur nos tarifs et sur les moyens de livraisons.</h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/src/Controller/ConditionController.php'|file_link(0) }}">src/Controller/ConditionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/lio/Sites/lawoodfactory/templates/condition/index.html.twig'|file_link(0) }}">templates/condition/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="condition__container">
+            {% for condition in conditions %}
+                {{ condition.content | raw }}
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

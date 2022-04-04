@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ConditionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConditionController extends AbstractController
 {
     /**
-     * @Route("/condition", name="app_condition")
+     * @Route("/conditions", name="condition")
      */
-    public function index(): Response
+    public function index(ConditionRepository $conditionRepository): Response
     {
         return $this->render('condition/index.html.twig', [
-            'controller_name' => 'ConditionController',
+            'conditions' => $conditionRepository->findAll()
         ]);
     }
 }

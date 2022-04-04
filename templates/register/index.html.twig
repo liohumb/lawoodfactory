@@ -58,7 +58,7 @@
                     {{ form_errors(form.password) }}
                     <div class="form__content-check">
                         {{ form_widget(form.cguv) }}
-                        <label for="register_cguv" class="form__label-check">Merci d'accepter les <a href="" target="_blank">conditions générales d'utilisation et de vente</a>.</label>
+                        <label for="register_cguv" class="form__label-check">Merci d'accepter les <a href="{{ path('condition') }}" target="_blank">conditions générales d'utilisation et de vente</a>.</label>
                     </div>
                     {{ form_errors(form.cguv) }}
                 </div>

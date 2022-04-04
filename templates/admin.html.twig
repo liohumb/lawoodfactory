@@ -71,18 +71,18 @@
         <div class="footer__box">
             <h3 class="footer__title">EXPLORER</h3>
             <ul>
-                <li><a href="#" class="footer__link">Administration</a></li>
+                <li><a href="{{ path('admin') }}" class="footer__link">Administration</a></li>
                 <li><a href="#" class="footer__link">Utilisateurs</a></li>
-                <li><a href="#" class="footer__link">Commandes</a></li>
-                <li><a href="#" class="footer__link">Produits</a></li>
+                <li><a href="{{ path('admin_order') }}" class="footer__link">Commandes</a></li>
+                <li><a href="{{ path('admin_product') }}" class="footer__link">Produits</a></li>
             </ul>
         </div>
 
         <div class="footer__box">
             <h3 class="footer__title">PERSONNALISER</h3>
             <ul>
-                <li><a href="#" class="footer__link">Transporteurs</a></li>
-                <li><a href="#" class="footer__link">Conditions générales</a></li>
+                <li><a href="{{ path('admin_carrier') }}" class="footer__link">Transporteurs</a></li>
+                <li><a href="{{ path('admin_condition') }}" class="footer__link">Conditions générales</a></li>
             </ul>
         </div>
 
@@ -90,7 +90,7 @@
             <h3 class="footer__title">OUTILS</h3>
             <div class="footer__socials">
                 <a href="https://app.mailjet.com/dashboard" target="_blank" class="footer__social"><i class='bx bx-mail-send'></i></a>
-                <a href="#" class="footer__social"><i class='bx bxl-stripe' ></i></a>
+                <a href="https://dashboard.stripe.com/dashboard" target="_blank" class="footer__social"><i class='bx bxl-stripe' ></i></a>
             </div>
         </div>
 

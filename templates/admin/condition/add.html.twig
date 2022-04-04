@@ -1,0 +1,24 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Conditions • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="account section" id="account">
+        <h2 class="account__title">Les conditions d'utilisation & de vente</h2>
+        <a href="{{ path('admin') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
+        <h3 class="account__subtitle">{{ app.user.firstname }}, c'est dans cet espace que vous allez pouvoir ajouter les conditions d'utilisation et de vente.</h3>
+
+        <div class="account__condition-container">
+            {{ form_start(form) }}
+            <button class="button account__condition-button">
+                Ajouter
+            </button>
+            <div class="form__inputs">
+                <div class="form__content">
+                    {{ form_widget(form.content) }}
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
