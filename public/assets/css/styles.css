@@ -556,26 +556,36 @@ margin: .4rem 0 0 0;
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: flex-end;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   border-radius: .75rem;
-  padding: 0 1rem;
-  background-color: var(--container-color);
   -webkit-transition: .3s;
-  transition: .3s;
+  transition: 1s;
 }
 
 .collection__box:hover {
-  -webkit-transform: translateY(-0.5rem);
-          transform: translateY(-0.5rem);
+  transform: scale(1.025);
 }
 
-.collection__img {
-  width: 90px;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
+.collection__data {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(33, 70, 95, .4);
+  border-radius: .75rem;
+  transition: 1s;
+}
+
+.collection__data:hover {
+  background-color: rgba(33, 70, 95, .15);
+}
+
+.collection__box2 {
+  justify-content: flex-start;
 }
 
 .collection__box .collection__data {
@@ -588,22 +598,24 @@ margin: .4rem 0 0 0;
 
 .collection__title {
   font-size: var(--h1-font-size);
+  color: var(--container-color);
   line-height: 1.2;
-  margin-bottom: var(--mb-2);
   text-transform: uppercase;
-  font-weight: var(--font-medium);
+  font-weight: var(--font-bold);
+  margin: 0 3rem 1.5rem 3rem;
 }
 
 .collection__subtitle {
   font-family: var(--font-alt);
   font-size: var(--h3-font-size);
   text-transform: capitalize;
-  color: var(--text-color-light);
+  color: var(--first-color-lighten);
 }
 
 .collection__view {
   font-size: var(--small-font-size);
   color: var(--first-color-lighten);
+  margin: 0 3rem;
 }
 
 .collection__view:hover {
@@ -3016,9 +3028,6 @@ margin: .4rem 0 0 0;
     -ms-grid-rows: 204px;
     grid-template-rows: 204px;
   }
-  .collection__box {
-    padding: .5rem  3rem 0;
-  }
   .offer__data {
     padding: 5rem 0;
   }
@@ -3220,9 +3229,6 @@ margin: .4rem 0 0 0;
     -ms-grid-rows: 238px;
     grid-template-rows: 238px;
   }
-  .collection__img {
-    width: 130px;
-  }
   .account__container,
   .account__admin-container,
   .account__product-container {
@@ -3321,9 +3327,6 @@ margin: .4rem 0 0 0;
 @media screen and (max-width: 321px) {
   .home__img {
     width: 198px;
-  }
-  .collection__img {
-    width: 80px;
   }
   .contact__form {
     -ms-grid-columns: 60% 40%;

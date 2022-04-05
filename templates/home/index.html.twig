@@ -18,21 +18,18 @@
     <!--===== COLLECTION =====-->
     <section class="collection section">
         <div class="collection__container grid">
-            <div class="collection__box">
-                <img src="{{ asset('assets/img/collection1.png') }}" alt="" class="collection__img">
-                <div class="collection__data">
+            <div class="collection__box" style="background: url({{ asset('assets/img/collection1.png') }}) no-repeat center center; background-size: cover;">
+                <a href="{{ path('product') }}" class="collection__data">
                     <h2 class="collection__title"><span class="collection__subtitle">Produits</span><br> Meubles & co</h2>
-                    <a href="#" class="collection__view">Notre boutique en ligne</a>
-                </div>
+                    <p class="collection__view">Notre boutique en ligne</p>
+                </a>
             </div>
 
-            <div class="collection__box collection__box2">
-                <div class="collection__data">
+            <div class="collection__box collection__box2" style="background: url({{ asset('assets/img/collection2.png') }}) no-repeat center center; background-size: cover;">
+                <a href="{{ path('service') }}" class="collection__data">
                     <h2 class="collection__title"><span class="collection__subtitle">Services</span><br> sur-mesure</h2>
-                    <a href="#" class="collection__view">Contactez nous</a>
-                </div>
-
-                <img src="{{ asset('assets/img/collection2.png') }}" alt="" class="collection__img">
+                    <p class="collection__view">Demande de devis</p>
+                </a>
             </div>
         </div>
     </section>
@@ -122,7 +119,7 @@
         </div>
     </section>
 
-    <!--===== contact =====-->
+    <!--===== CONTACT =====-->
     <section class="contact section" id="contact">
         <div class="contact__container grid">
             <div class="contact__subscribe">
