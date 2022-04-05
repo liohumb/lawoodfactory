@@ -76,6 +76,7 @@ html {
 }
 
 body {
+  background-color: var(--container-color);
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
@@ -105,10 +106,6 @@ img {
 /*===== CLASS CSS ===== */
 .section {
   padding: 6rem 0;
-}
-
-.section__bg {
-  background-color: var(--container-color);
 }
 
 .section__title {
@@ -149,6 +146,7 @@ img {
   left: 0;
   z-index: var(--z-fixed);
   background-color: var(--container-color);
+  transition: top 1s;
 }
 
 /*===== BUTTON =====*/
@@ -545,6 +543,10 @@ margin: .4rem 0 0 0;
 }
 
 /*===== COLLECTION =====*/
+.collection {
+  padding: 0;
+}
+
 .collection__container {
   grid-template-rows: repeat(2, 174px);
   row-gap: 2rem;
@@ -622,73 +624,55 @@ margin: .4rem 0 0 0;
   text-decoration: underline;
 }
 
-/*===== FEATURED PRODUCTS =====*/
-.featured__container {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  row-gap: 2rem;
-}
-
-.featured__product {
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.featured__product:hover {
-  -webkit-transform: translateY(-0.5rem);
-          transform: translateY(-0.5rem);
-}
-
-.featured__box {
-  height: 305px;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: var(--container-color);
-  border-radius: .75rem;
-  padding: 1rem;
-}
-
-.featured__data {
+/*===== SOCIAL =====*/
+.social__bg {
   text-align: center;
 }
 
-.featured__name {
-  margin-bottom: 0;
-  text-transform: uppercase;
-  font-size: var(--normal-font-size);
-}
-
-.featured__price {
-  color: var(--first-color-alt);
-  font-family: var(--font-alt);
-  font-weight: var(--font-medium);
-}
-
-/*===== OFFER =====*/
-.offer__bg {
-  text-align: center;
-}
-
-.offer__data {
+.social__data {
   padding: 3.5rem .25rem;
   background: rgba(0, 0, 0, 0.5);
   color: var(--white-color);
 }
 
-.offer__title {
+.social__title {
   font-size: var(--h1-font-size);
   letter-spacing: .2rem;
   text-transform: uppercase;
   font-weight: var(--font-medium);
 }
 
-.offer__description {
+.social__description {
   margin-bottom: var(--mb-2);
   letter-spacing: .2rem;
+}
+
+.social__buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.social__button {
+  border: .025rem solid #000;
+  background-color: rgba(244, 242, 241, .15);
+  box-shadow: rgba(0, 0, 0, 0.56) 0 22px 70px 4px;
+  border-radius: .75rem;
+  padding: 1rem 1rem 0 1rem;
+  margin: 0 0 2rem 0;
+  transition: 1s;
+}
+
+.social__button:hover {
+  transform: scale(1.1);
+}
+
+.social__button-facebook,
+.social__button-instagram {
+  width: 250px;
 }
 
 /*===== NEW ARRIVALS =====*/
@@ -742,7 +726,12 @@ margin: .4rem 0 0 0;
 
 .contact__subscribe form {
   width: 90%;
+  display: grid;
   margin: 0 auto;
+}
+
+.contact__subscribe form button {
+  margin: 2rem auto 0 auto;
 }
 
 /*===== TEMPLATE =====*/
@@ -1450,6 +1439,10 @@ margin: .4rem 0 0 0;
 }
 
 /*===== PRODUCTS =====*/
+.products__new {
+  padding: 0;
+}
+
 .products__section-title {
   font-size: var(--h1-font-size);
   color: var(--title-color);
@@ -1501,6 +1494,11 @@ margin: .4rem 0 0 0;
   position: relative;
   border-radius: 1rem;
   transition: 1s;
+}
+
+.products__new-card {
+  width: 340px;
+  height: 320px;
 }
 
 .products__card:hover {
@@ -3028,8 +3026,15 @@ margin: .4rem 0 0 0;
     -ms-grid-rows: 204px;
     grid-template-rows: 204px;
   }
-  .offer__data {
+  .social__data {
     padding: 5rem 0;
+  }
+  .social__buttons {
+    width: 75%;
+     flex-direction: row;
+  }
+  .social__button {
+    margin: 0;
   }
   .new__container {
     grid-template-columns: repeat(3, 1fr);
@@ -3156,8 +3161,13 @@ margin: .4rem 0 0 0;
   .products__content-new {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
     margin: 0 auto;
+  }
+  .product__content {
+    gap: 4rem;
+  }
+  .products__content-new {
+    gap: 2rem;
   }
   .product__infos-one {
     display: flex;
@@ -3243,6 +3253,9 @@ margin: .4rem 0 0 0;
   }
   .products__content {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .products__content-new {
+    gap: 4rem;
   }
   .product__informations-container {
     margin: 2rem auto;

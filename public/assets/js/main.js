@@ -25,7 +25,7 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*=============== POPULAR SWIPER ===============*/
+/*===== POPULAR SWIPER =====*/
 let swiperPopular = new Swiper('.products__mobile-container', {
     loop: true,
     spaceBetween: 30,

@@ -3,7 +3,7 @@
 {% block title %}Vos produits aimés • L&A WoodFactory{% endblock %}
 
 {% block content %}
-    <section class="products section section__bg" id="products">
+    <section class="products section" id="products">
         {% if user.likes | length == 0 %}
             <h2 class="products__section-titleEmpty">
                 Vous n'avez pas encore aimé de produit...

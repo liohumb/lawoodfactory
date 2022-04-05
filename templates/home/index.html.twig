@@ -8,7 +8,7 @@
         <div class="home__container grid">
             <div class="home__data">
                 <h1 class="home__title">L&A <br> <span>WOODFACTORY</span></h1>
-                <a href="#featured" class="button">VOIR NOS PRODUITS</a>
+                <a href="#product__top" class="button">VOIR NOS PRODUITS</a>
             </div>
 
             <img src="{{ asset('assets/img/home.png') }}" alt="" class="home__img">
@@ -34,8 +34,8 @@
         </div>
     </section>
 
-    <!--===== FEATURED PRODUCTS =====-->
-    <section class="featured section" id="featured">
+    <!--===== TOP PRODUCTS =====-->
+    <section class="products__top section" id="product__top">
         <h2 class="section__title">LES PRODUITS DU MOMENT</h2>
         <a href="#" class="section__subtitle">Voir tous les produits</a>
 
@@ -71,19 +71,26 @@
         </div>
     </section>
 
-    <!--===== OFFER =====-->
-    <section class="offer section">
-        <div class="offer__bg" style="background: url({{ asset('assets/img/offer.jpg') }}) no-repeat center center; background-size: cover;">
-            <div class="offer__data">
-                <h2 class="offer__title">Offre spéciale !</h2>
-                <p class="offer__description">Découvrez nos promotions du moment !</p>
-                <a href="" class="button button__alt">DÉCOUVRIR</a>
+    <!--===== SOCIAL =====-->
+    <section class="social section">
+        <div class="social__bg" style="background: url({{ asset('assets/img/social.jpg') }}) no-repeat center center; background-size: cover;">
+            <div class="social__data">
+                <h2 class="social__title">Suivez nous !</h2>
+                <p class="social__description">Restez informez de notre actualité sur les réseaux sociaux</p>
+                <div class="social__buttons">
+                    <a href="" class="social__button" target="_blank">
+                        <img src="{{ asset('assets/img/social/facebook.png') }}" alt="" class="social__button-facebook">
+                    </a>
+                    <a href="https://www.instagram.com/l.a_woodfactory/" class="social__button" target="_blank">
+                        <img src="{{ asset('assets/img/social/instagram.png') }}" alt="" class="social__button-instagram">
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!--===== NEW ARRIVALS =====-->
-    <section class="featured section" id="new">
+    <!--===== NEW PRODUCTS =====-->
+    <section class="products__new section" id="new">
         <h2 class="section__title">NOUVEAUX PRODUITS</h2>
         <a href="#" class="section__subtitle">Voir tous les produits</a>
 
@@ -105,7 +112,7 @@
         <div class="products__container container">
             <div class="products__content-new grid">
                 {% for product in productNew %}
-                    <article class="products__card" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                    <article class="products__card products__new-card" style="background: url({{ asset('uploads/' ~ product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
                         <a href="{{ path('product_show', {slug: product.slug}) }}">
                             <div class="products__data">
                                 <h1 class="products__title">{{ product.title }}</h1>
