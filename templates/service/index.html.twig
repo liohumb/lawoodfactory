@@ -8,19 +8,100 @@
                 <h1 class="service__title">À votre service</h1>
                 <div class="service__content">
                     <p class="service__content-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, laborum suscipit doloremque, expedita voluptatum maiores corporis modi assumenda esse consectetur error nulla, vero alias.</p>
-                    <a href="" class="button">Contactez nous</a>
+                    <a href="#service__contact" class="button">Contactez nous</a>
                 </div>
                 <div class="service__image">
-                    <img src="https://images.unsplash.com/photo-1445966275305-9806327ea2b5?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=14a02fab1200216368d682ecaa91e540" alt="">
+                    <div class="service__slider">
+                        <div class="service__slides">
+                            <input type="radio" name="radio-btn" id="service__radio1" style="display: none">
+                            <input type="radio" name="radio-btn" id="service__radio2" style="display: none">
+                            <input type="radio" name="radio-btn" id="service__radio3" style="display: none">
+                            <input type="radio" name="radio-btn" id="service__radio4" style="display: none">
+
+                            <div class="service__slide first" style="background: url({{ asset('assets/img/service/service1.jpg') }}) no-repeat center center; background-size: cover;">
+                            </div>
+                            <div class="service__slide" style="background: url({{ asset('assets/img/service/service2.jpg') }}) no-repeat center center; background-size: cover;">
+                            </div>
+                            <div class="service__slide" style="background: url({{ asset('assets/img/service/service3.jpg') }}) no-repeat center center; background-size: cover;">
+                            </div>
+                            <div class="service__slide" style="background: url({{ asset('assets/img/service/service4.jpg') }}) no-repeat center center; background-size: cover;">
+                            </div>
+
+                            <div class="service__navigation-auto" style="display: none">
+                                <div class="service__auto-btn1"></div>
+                                <div class="service__auto-btn2"></div>
+                                <div class="service__auto-btn3"></div>
+                                <div class="service__auto-btn4"></div>
+                            </div>
+                        </div>
+
+                        <div class="service__navigation-manual" style="display: none">
+                            <label for="service__radio1" class="service__manual-btn"></label>
+                            <label for="service__radio2" class="service__manual-btn"></label>
+                            <label for="service__radio3" class="service__manual-btn"></label>
+                            <label for="service__radio4" class="service__manual-btn"></label>
+                        </div>
+                    </div>
                 </div>
         </div>
     </section>
-    <section class="service__contact section section__bg">
-        <h1 class="section__title">Un projet ? <br>Dites nous tout !</h1>
-        <h3 class="section__subtitle">Prenez contact avec nous dès à présent pour discuter de votre projet.</h3>
 
-        <div class="service__contact-container">
-            
+    <section class="contact section section__bg" id="service__contact">
+        <div class="contact__container grid">
+            <div class="contact__subscribe service__form">
+                <h2 class="section__title">Un projet ? <br>Dites nous tout !</h2>
+                <p class="contact__description">Prenez contact avec nous dès à présent pour discuter de votre projet.</p>
+                {% if notification %}
+                    <p class="contact__description">{{ notification | raw }}</p>
+                {% endif %}
+
+                {{ form_start(form) }}
+                <div class="form__inputs service__form-inputs">
+                    <div class="form__contents">
+                        <div class="form__content form__content-left">
+                            {{ form_widget(form.name) }}
+                            {{ form_label(form.name) }}
+                        </div>
+                        <div class="form__content form__content-right">
+                            {{ form_widget(form.email) }}
+                            {{ form_label(form.email) }}
+                        </div>
+                    </div>
+                    <div class="form__contents">
+                        <div class="form__content form__content-leftAlt">
+                            {{ form_widget(form.phone) }}
+                            {{ form_label(form.phone) }}
+                        </div>
+                        <div class="form__content form__content-right">
+                            {{ form_widget(form.city) }}
+                            {{ form_label(form.city) }}
+                        </div>
+                    </div>
+                    <div class="form__content form__area">
+                        {{ form_widget(form.content) }}
+                        {{ form_label(form.content) }}
+                    </div>
+                </div>
+
+                <button class="button">
+                    Envoyer
+                </button>
+                {{ form_end(form) }}
+            </div>
         </div>
     </section>
 {% endblock %}
+
+{% block JavaScript %}
+    <script type="text/javascript">
+        var counter = 1;
+        setInterval(function(){
+            document.getElementById('service__radio' + counter).checked = true;
+            counter++;
+            if(counter > 4){
+                counter = 1;
+            }
+        }, 5000);
+    </script>
+{% endblock %}
+

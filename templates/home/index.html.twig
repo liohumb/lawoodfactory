@@ -129,7 +129,7 @@
                 <h2 class="section__title">CONTACTEZ NOUS</h2>
                 <p class="contact__description">Pour toutes questions ou autres, n'hésitez pas et contactez-nous dès à présent !</p>
                 {% if notification %}
-                    <p class="contact__description">{{ notification }}</p>
+                    <p class="contact__description">{{ notification | raw }}</p>
                 {% endif %}
 
                 {{ form_start(form) }}

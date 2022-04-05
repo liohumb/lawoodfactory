@@ -26,7 +26,7 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $notification = "Merci de nous avoir contacté. Nous vous répondrons dans les meilleurs délais.";
+            $notification = "Merci de nous avoir contacté. <br>Nous vous répondrons dans les meilleurs délais.";
 
             $mail = new Mail();
             $mail->send(
