@@ -844,6 +844,10 @@ margin: .4rem 0 0 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
+.template__form-login {
+  height: 70vh;
+}
+
 .template__form form {
   width: 100%;
   padding: 2.5rem 4rem;

@@ -5,7 +5,7 @@
 {% block content %}
     <section class="template section container" id="template">
         <div class="template__container grid">
-            <div class="template__form template__border-lt">
+            <div class="template__form template__form-login template__border-lt">
                 <form method="post">
                     {% if error %}
                         <h3 class="form__notification">{{ error.messageKey|trans(error.messageData, 'security') }}</h3>
@@ -55,18 +55,17 @@
                 <div class="template__box-bg template__border-rb">
                     <h1 class="template__box-title">Connexion</h1>
                     <h3 class="template__box-subtitle">Connectez vous dès à présent et accédez à votre espace L&A WoodFactory et bien plus encore !</h3>
-                    <h3 class="template__box-other">Vous avez aussi la possibilité de vous connecter avec :</h3>
-                    <div class="template__box-social">
-                        <a href="">
-                            <i class='bx bxl-facebook'></i>
-                        </a>
-                        <a href="">
-                            <i class='bx bxl-google' ></i>
-                        </a>
-                        <a href="">
-                            <i class='bx bxl-apple' ></i>
-                        </a>
-                    </div>
+
+{#                    <h3 class="template__box-other">Vous avez aussi la possibilité de vous connecter avec :</h3>#}
+{#                    <div class="template__box-social">#}
+{#                        <a href="">#}
+{#                            <i class='bx bxl-facebook'></i>#}
+{#                        </a>#}
+{#                        <a href="">#}
+{#                            <i class='bx bxl-google' ></i>#}
+{#                        </a>#}
+{#                    </div>#}
+
                     <span class="template__box-detail">
                         Vous n'avez pas de compte ? <br>
                         <a href="{{ path('register') }}">inscrivez-vous</a>
