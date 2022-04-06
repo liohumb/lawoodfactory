@@ -2865,7 +2865,36 @@ margin: .4rem 0 0 0;
   margin-right: var(--mb-1);
 }
 
-/* ===== MEDIA QUERIES=====*/
+/* ===== ERROR =====*/
+.error {
+  padding: 0;
+}
+
+.error__container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4.5rem;
+}
+
+.error__image {
+  animation-name: spinError;
+  animation-duration: 15000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spinError {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* ===== MEDIA QUERIES =====*/
 @media screen and (min-width: 568px) {
   .home__data {
     padding: 0;
@@ -3220,6 +3249,13 @@ margin: .4rem 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .error__container {
+    height: 100vh;
+    padding: 7rem;
+  }
+  .error__image {
+    height: 100%;
   }
 }
 
