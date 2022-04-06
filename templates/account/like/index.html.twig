@@ -4,6 +4,7 @@
 
 {% block content %}
     <section class="products section" id="products">
+        <a href="{{ path('account') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
         {% if user.likes | length == 0 %}
             <h2 class="products__section-titleEmpty">
                 Vous n'avez pas encore aimé de produit...

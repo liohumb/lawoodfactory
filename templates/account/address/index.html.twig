@@ -4,6 +4,7 @@
 
 {% block content %}
     <section class="address section" id="address">
+        <a href="{{ path('account') }}" class="account__back"><i class='bx bx-arrow-back'></i></a>
         {% if user.addresses | length == 0 %}
             <div class="address__container-empty">
                 <h1>Vous n'avez pas encore renseigné d'adresse...</h1>

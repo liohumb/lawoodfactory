@@ -37,7 +37,7 @@
     <!--===== TOP PRODUCTS =====-->
     <section class="products__top section" id="product__top">
         <h2 class="section__title">LES PRODUITS DU MOMENT</h2>
-        <a href="#" class="section__subtitle">Voir tous les produits</a>
+        <a href="{{ path('product') }}" class="section__subtitle">Voir tous les produits</a>
 
         <div class="products__mobile-container container swiper">
             <div class="swiper-wrapper">
@@ -78,9 +78,11 @@
                 <h2 class="social__title">Suivez nous !</h2>
                 <p class="social__description">Restez informez de notre actualité sur les réseaux sociaux</p>
                 <div class="social__buttons">
-                    <a href="" class="social__button" target="_blank">
-                        <img src="{{ asset('assets/img/social/facebook.png') }}" alt="" class="social__button-facebook">
-                    </a>
+
+{#                    <a href="" class="social__button" target="_blank">#}
+{#                        <img src="{{ asset('assets/img/social/facebook.png') }}" alt="" class="social__button-facebook">#}
+{#                    </a>#}
+
                     <a href="https://www.instagram.com/l.a_woodfactory/" class="social__button" target="_blank">
                         <img src="{{ asset('assets/img/social/instagram.png') }}" alt="" class="social__button-instagram">
                     </a>
@@ -92,7 +94,7 @@
     <!--===== NEW PRODUCTS =====-->
     <section class="products__new section" id="new">
         <h2 class="section__title">NOUVEAUX PRODUITS</h2>
-        <a href="#" class="section__subtitle">Voir tous les produits</a>
+        <a href="{{ path('product') }}" class="section__subtitle">Voir tous les produits</a>
 
         <div class="products__mobile-container container swiper">
             <div class="swiper-wrapper">
