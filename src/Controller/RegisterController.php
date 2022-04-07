@@ -66,11 +66,11 @@ class RegisterController extends AbstractController
                 $user->getFirstname() . ' ' . $user->getLastname(),
                 "Confirmation d'em@il • L & A WoddFactory",
                 "Bien le bonjour " . $user->getFirstname() . ",<br><br>
-                        Avant tout, nous vous remercions pour votre inscription sur le site <b>L & A WoodFactory</b>. <br><br><br>
+                        Avant tout, nous vous remercions pour votre inscription sur le site <b>L&A WoodFactory</b>. <br><br><br>
                         Il reste encore une petite étape pour finaliser votre inscription. <br>
                         Afin de confirmer votre adresse em@il et de pouvoir commander sur L & A WoodFactory <br>
-                        <a href='https://127.0.0.1:8000" . $url . "'>merci de cliquer ici</a>. <br><br><br>
-                        Si vous rencontrez des difficultés à vous connecter n'hésitez pas à <a href='https://lawoodfactory.fr/#contat'>nous contacter</a>."
+                        <a href='https://127.0.0.1:8000" . $url . "' style='color: grey'>merci de cliquer ici</a>. <br><br><br>
+                        Si vous rencontrez des difficultés à vous connecter n'hésitez pas à <a href='https://lawoodfactory.fr/#contat' style='color: grey'>nous contacter</a>."
             );
 
             return $this->redirectToRoute('register_success');
@@ -87,6 +87,9 @@ class RegisterController extends AbstractController
      */
     public function success(): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
         return $this->render('register/success.html.twig');
     }
 
