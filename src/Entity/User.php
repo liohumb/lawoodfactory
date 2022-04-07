@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
+ * @ORM\Table(name="`user`", indexes={@ORM\Index(columns={"email", "firstname", "lastname"}, flags={"fulltext"})})
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

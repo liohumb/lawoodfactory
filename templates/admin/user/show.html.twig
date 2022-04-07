@@ -1,0 +1,239 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}{{ user.firstname }} {{ user.lastname}} • L&A WoodFactory{% endblock %}
+
+{% block content %}
+    <section class="template section container" id="template">
+        <div class="template__container grid">
+            <div class="template__box template__border-lt" style="background: url({{ asset('assets/img/template/register.jpg') }}) no-repeat center center; background-size: cover">
+                <div class="template__box-bg template__border-lt">
+                    <h1 class="template__box-title">{{ user.firstname }} {{ user.lastname }}</h1>
+                    <h3 class="template__box-subtitle">{{ app.user.firstname }}, retrouvez les détails sur {{ user.firstname }} et son activité sur votre site internet.</h3>
+                    <a href="{{ path('admin_user') }}" class="button button__alt">Retour aux utilisateurs</a>
+                </div>
+            </div>
+
+            <div class="template__form template__border-rb">
+                <div class="template__order">
+                    <div class="template__user-date">
+                        <h3>Inscrit depuis :</h3>
+                        <span>{{ user.createdAt | date("d/m/Y H:i", "Europe/Paris") }}</span>
+                    </div>
+                    <div class="template__user-email">
+                        <h3>Adresse email :</h3>
+                        <span>{{ user.email }}</span>
+                    </div>
+                    <div class="template__user-address">
+                        <h3>Adresse postale :</h3>
+                        {% if user.addresses | length %}
+                            <a class="template__user-addressButton">Voir <span>({{ user.addresses | length }} adresse(s))</span></a>
+                        {% else %}
+                            <span>Aucune adresse</span>
+                        {% endif %}
+                    </div>
+                    <div class="template__user-order">
+                        <h3>Commande passée :</h3>
+                        {% if user.orders | length %}
+                            <a class="template__user-orderButton">Voir <span>({{ user.orders | length }} commande(s))</span></a>
+                        {% else %}
+                            <span>Aucune commande</span>
+                        {% endif %}
+                    </div>
+                    <div class="template__user-like">
+                        <h3>Produit aimée :</h3>
+                        {% if user.likes | length %}
+                            <a class="template__user-likeButton">Voir <span>({{ user.likes | length }} like(s))</span></a>
+                        {% else %}
+                            <span>Aucun like</span>
+                        {% endif %}
+                    </div>
+                    <div class="template__user-comment">
+                        <h3>Produit commenté :</h3>
+                        {% if user.comments | length %}
+                            <a class="template__user-commentButton">Voir <span>({{ user.comments | length }} commentaire(s))</span></a>
+                        {% else %}
+                            <span>Aucun</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="template__user-addressModal"></div>
+        <div class="template__user-orderModal"></div>
+        <div class="template__user-likeModal"></div>
+        <div class="template__user-commentModal"></div>
+
+        <div class="template__user-addressOption">
+            <div class="template__user-addressContainer">
+                <h3 class="template__user-addressTitle">Mais où est {{ user.firstname }} ?</h3>
+                <div class="template__user-addressContent">
+                    {% for address in user.addresses %}
+                        <div class="address__card">
+                            <div class="address__data">
+                                <h1 class="address__title">{{ address.title }}</h1>
+                                {% if address.company is defined %}
+                                    <h3 class="address__company">{{ address.company }}</h3>
+                                {% endif %}
+                                <h3 class="address__address">{{ address.address }}</h3>
+                                <div class="address__code-city">
+                                    <h5 class="address__postcode">{{ address.postcode }}</h5>
+                                    <span> | </span>
+                                    <h5 class="address__city">{{ address.city }}</h5>
+                                </div>
+                                <h5 class="address__phone">{{ address.phone }}</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="template__user-orderOption">
+            <div class="template__user-orderContainer">
+                <h3 class="template__user-orderTitle">Qu'est ce que {{ user.firstname }} à commandé?</h3>
+                <div class="template__user-orderContent">
+                    <div class="account__comment-container">
+                        <ul class="account__table">
+                            <li class="account__table-header">
+                                <div class="account__table-col account__table-orderReference">Commandes</div>
+                                <div class="account__table-col account__table-orderDate">Date</div>
+                                <div class="account__table-col account__table-orderNumberProduct">Produit(s)</div>
+                                <div class="account__table-col account__table-orderPrice">Total</div>
+                                <div class="account__table-col account__table-orderButton"> </div>
+                            </li>
+                            {% for order in user.orders %}
+                                <li class="account__table-row">
+                                    <div class="account__table-col account__table-orderReference" data-label="Commande">
+                                        <span>
+                                        {{ order.reference }}
+                                        </span>
+                                    </div>
+                                    <div class="account__table-col account__table-orderDate" data-label="Date">
+                                        <span>
+                                        {{ order.createdAt | date("d/m/Y H:i", "Europe/Paris") }}
+                                        </span>
+                                    </div>
+                                    <div class="account__table-col account__table-orderNumberProduct" data-label="Nombre de produits">
+                                        <span>
+                                            {{ order.orderDetails |length }}
+                                        </span>
+                                    </div>
+                                    <div class="account__table-col account__table-orderPrice" data-label="Total">
+                                        <span>
+                                            {{ (order.total + order.carrierPrice) | number_format(2, '€', '.') }}
+                                        </span>
+                                    </div>
+                                    <div class="account__table-col account__table-orderButton" data-label=" ">
+                                        <a href="{{ path('admin_order_show', { reference : order.reference}) }}">
+                                            <i class='bx bx-search-alt'></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="template__user-likeOption">
+            <div class="template__user-likeContainer">
+                <h3 class="template__user-likeTitle">Qu'est ce que {{ user.firstname }} aime ?</h3>
+                <div class="template__user-likeContent">
+                    {% for product in user.likes %}
+                        <article class="products__card" style="background: url({{ asset('uploads/' ~ product.product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                            <a href="{{ path('product_show', {slug: product.product.slug}) }}">
+                                <div class="products__data">
+                                    <h1 class="products__title">{{ product.product.title }}</h1>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="template__user-commentOption">
+            <div class="template__user-commentContainer">
+                <h3 class="template__user-commentTitle">Que pense {{ user.firstname }} ?</h3>
+                <div class="template__user-commentContent">
+                    {% for product in user.comments %}
+                        <article class="products__card" style="background: url({{ asset('uploads/' ~ product.product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
+                            <a href="{{ path('product_show', {slug: product.product.slug}) }}">
+                                <div class="products__data">
+                                    <h3 class="products__subtitle">{{ product.content | u.truncate(60, '...') }}</h3>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        const buttonAddress = document.querySelectorAll('.template__user-addressButton');
+        const modalAddress = document.querySelector('.template__user-addressModal');
+        const optionAddress = document.querySelector('.template__user-addressOption');
+
+        modalAddress.addEventListener('click', function () {
+            this.style.display = "none";
+            optionAddress.style.display = "none";
+        })
+
+        buttonAddress.forEach(function (btnAddress) {
+            btnAddress.addEventListener('click', function () {
+                modalAddress.style.display = "block";
+                optionAddress.style.display = "block";
+            })
+        })
+
+        const buttonOrder = document.querySelectorAll('.template__user-orderButton');
+        const modalOrder = document.querySelector('.template__user-orderModal');
+        const optionOrder = document.querySelector('.template__user-orderOption');
+
+        modalOrder.addEventListener('click', function () {
+            this.style.display = "none";
+            optionOrder.style.display = "none";
+        })
+
+        buttonOrder.forEach(function (btnOrder) {
+            btnOrder.addEventListener('click', function () {
+                modalOrder.style.display = "block";
+                optionOrder.style.display = "block";
+            })
+        })
+
+        const buttonLike = document.querySelectorAll('.template__user-likeButton');
+        const modalLike = document.querySelector('.template__user-likeModal');
+        const optionLike = document.querySelector('.template__user-likeOption');
+
+        modalLike.addEventListener('click', function () {
+            this.style.display = "none";
+            optionLike.style.display = "none";
+        })
+
+        buttonLike.forEach(function (btnLike) {
+            btnLike.addEventListener('click', function () {
+                modalLike.style.display = "block";
+                optionLike.style.display = "block";
+            })
+        })
+
+        const buttonComment = document.querySelectorAll('.template__user-commentButton');
+        const modalComment = document.querySelector('.template__user-commentModal');
+        const optionComment = document.querySelector('.template__user-commentOption');
+
+        modalComment.addEventListener('click', function () {
+            this.style.display = "none";
+            optionComment.style.display = "none";
+        })
+
+        buttonComment.forEach(function (btnComment) {
+            btnComment.addEventListener('click', function () {
+                modalComment.style.display = "block";
+                optionComment.style.display = "block";
+            })
+        })
+    </script>
+{% endblock %}

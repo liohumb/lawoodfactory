@@ -36,7 +36,7 @@
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="" class="nav__link">Utilisateurs</a>
+                    <a href="{{ path('admin_user') }}" class="nav__link">Utilisateurs</a>
                 </li>
                 <li class="nav__item">
                     <a href="{{ path('admin_order') }}" class="nav__link">Commandes</a>
@@ -64,8 +64,9 @@
 <footer class="footer section">
     <div class="footer__container grid">
         <div class="footer__box">
-            <h3 class="footer__title">L&A <br>WOODFACTORY</h3>
-            <p class="footer__deal">Administration</p>
+            <a href="{{ path('home') }}">
+                <img src="{{ asset('assets/img/logo_alt.png') }}" alt="L&A WoodFactory">
+            </a>
         </div>
 
         <div class="footer__box">
