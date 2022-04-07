@@ -98,7 +98,7 @@ class PasswordController extends AbstractController
                     "Bonjour " . $user->getFirstname() . ", <br><br>
                             Vous avez demandé à réinitializer votre mot de passe sur le site L & A WoodFactory. <br><br><br>
                             Merci de bien vouloir cliquer sur le lien suivant pour <br>
-                            <a href='https://127.0.0.1:8000". $url ."'>mettre à jour votre mot de passe</a>."
+                            <a href='https://lawoodfactory.fr". $url ."' style='color: gray'>mettre à jour votre mot de passe</a>."
                 );
 
                 $this->addFlash('notice', "Vous allez recevoir dans quelques seconde un email avec la procédure pour réinitialiser votre mot de passe.");

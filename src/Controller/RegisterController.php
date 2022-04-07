@@ -69,8 +69,8 @@ class RegisterController extends AbstractController
                         Avant tout, nous vous remercions pour votre inscription sur le site <b>L&A WoodFactory</b>. <br><br><br>
                         Il reste encore une petite étape pour finaliser votre inscription. <br>
                         Afin de confirmer votre adresse em@il et de pouvoir commander sur L & A WoodFactory <br>
-                        <a href='https://127.0.0.1:8000" . $url . "' style='color: grey'>merci de cliquer ici</a>. <br><br><br>
-                        Si vous rencontrez des difficultés à vous connecter n'hésitez pas à <a href='https://lawoodfactory.fr/#contat' style='color: grey'>nous contacter</a>."
+                        <a href='https://lawoodfactory" . $url . "' style='color: gray'>merci de cliquer ici</a>. <br><br><br>
+                        Si vous rencontrez des difficultés à vous connecter n'hésitez pas à <a href='https://lawoodfactory.fr/#contat' style='color: gray'>nous contacter</a>."
             );
 
             return $this->redirectToRoute('register_success');
