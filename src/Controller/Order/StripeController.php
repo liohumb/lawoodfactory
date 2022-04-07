@@ -49,7 +49,7 @@ class StripeController extends AbstractController
         }
 
         $productStripe = [];
-        $YOUR_DOMAIN = 'https://127.0.0.1:8000';
+        $YOUR_DOMAIN = 'https://lawoodfactory.fr';
 
         foreach ($order->getOrderDetails()->getValues() as $product) {
             $productObject = $this->entityManager->getRepository(Product::class)->findOneByTitle($product->getProduct());
