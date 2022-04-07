@@ -9,7 +9,7 @@
                 <div class="template__box-bg template__border-lt">
                     <h1 class="template__box-title">Gérer une commande</h1>
                     <h3 class="template__box-subtitle">{{ app.user.firstname }}, retrouvez les détails de la commande n°{{ order.reference }}</h3>
-                    <h3 class="template__box-other">Vous avez la possibilité d'obtenir le details pour la préparation de commande et de changer son statut.</h3>
+                    <h3 class="template__box-other">{{ order.delivery | raw }}</h3>
                     {% if notification %}
                         <h3 class="template__box-other">{{ notification }}</h3>
                     {% endif %}
@@ -36,7 +36,7 @@
                         <div class="template__order-products">
                             {% for product in order.orderDetails %}
                                 <div class="template__order-product">
-                                    <h3>{{ product.product }} <span>( x {{ product.quantity }} )</span></h3>
+                                    <h3>{{ product.product }} <span>(x {{ product.quantity }})</span></h3>
                                 </div>
                             {% endfor %}
                         </div>

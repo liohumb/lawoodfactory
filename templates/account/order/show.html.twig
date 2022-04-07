@@ -33,7 +33,7 @@
                         <div class="template__order-products">
                             {% for product in order.orderDetails %}
                                 <div class="template__order-product">
-                                    <h3>{{ product.product }} <span>( x {{ product.quantity }} )</span></h3>
+                                    <h3>{{ product.product }} <span>(x{{ product.quantity }})</span></h3>
                                 </div>
                             {% endfor %}
                         </div>

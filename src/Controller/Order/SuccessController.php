@@ -56,8 +56,8 @@ class SuccessController extends AbstractController
                 'Votre commande L&A WoodFactory est bien validée',
                 "Bien le bonjour " . $user->getFirstname() . ",<br><br>
                         Avant tout, nous vous remercions pour votre commande n°" . $order->getReference() . ".<br><br><br>
-                        Nous allons sans plus tarder commencer la fabrication de vos produits. <br>
-                        Retrouvez l'avancement de votre commande <a href='https://lawoodfactory.fr/votre-compte/" . $user->getId() . "/commandes/" . $order->getReference() ."'>dans votre compte L&A WoodFactory</a>."
+                        Nous allons sans plus tarder commencer la fabrication de votre commande. <br>
+                        Retrouvez l'avancement de votre commande <a href='https://lawoodfactory.fr/votre-compte/" . $user->getId() . "/commandes/" . $order->getReference() ."' style='color: grey'>dans votre compte L&A WoodFactory</a>."
             );
 
             $mailAdmin = new Mail();
@@ -68,7 +68,7 @@ class SuccessController extends AbstractController
                 "Bonne nouvelle Patron ! <br><br>
                         Vous avez une nouvelle commande sur L&AWoodFactory. <br>
                         La commande n°" . $order->getReference() . " de " . $user->getFirstname() . " " . $user->getLastname() . " n'attend plus que vous. <br>
-                        Tout les détails sont dans <a href='https://lawoodfactory.fr/administration/commandes/" . $order->getReference() . "'>votre administration</a>. <br><br>
+                        Tout les détails sont dans <a href='https://lawoodfactory.fr/administration/commandes/" . $order->getReference() . "' style='color: grey'>votre administration</a>. <br><br>
                         Félicitation et au boulot !!"
             );
         }

@@ -157,7 +157,7 @@
                 <div class="template__user-commentContent">
                     {% for product in user.comments %}
                         <article class="products__card" style="background: url({{ asset('uploads/' ~ product.product.illustrations[0].title) }}) no-repeat center center; background-size: cover;">
-                            <a href="{{ path('product_show', {slug: product.product.slug}) }}">
+                            <a href="{{ path('product_show', {slug: product.product.slug}) }}#{{ product.id }}">
                                 <div class="products__data">
                                     <h3 class="products__subtitle">{{ product.content | u.truncate(60, '...') }}</h3>
                                 </div>
